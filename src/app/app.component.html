@@ -1,35 +1,38 @@
 <div fxFlex class="padding-20">
 	<div fxLayout="row" fxLayoutAlign="start stretch">
-		<mat-form-field color="primary" appearance="outline">
-			<input matInput [matDatepicker]="picker" placeholder="Choose a date" />
-			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-			<mat-datepicker #picker></mat-datepicker>
-		</mat-form-field>
+		<div style="background: #ffffff; border-radius: 6px;" class="margin-padding-0 mat-elevation-z8">
+			<mat-form-field color="primary" appearance="outline">
+				<input
+					matInput
+					[matDatepicker]="picker"
+					placeholder="Choose a date"
+					(dateInput)="filterChats($event)"
+				/>
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<button mat-button (click)="removeFilter()">
+			Clear Filter
+		</button>
 	</div>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between start">
-		<mat-accordion style="width: 300px; margin: 20px 0;" *ngFor="let chat of chats">
+		<mat-accordion
+			style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;"
+			*ngFor="let chat of allChats"
+			class="mat-elevation-z5"
+		>
 			<mat-expansion-panel>
 				<mat-expansion-panel-header>
 					<mat-panel-title>
-						MultilingualQnA
+						{{ chat.title }}
 					</mat-panel-title>
-					<mat-panel-description> Type <span class="type-badge">P</span> </mat-panel-description>
 				</mat-expansion-panel-header>
 				<div class="grey-background">
 					<div style="max-height: 300px; overflow: auto; padding-left: 24px;">
 						<div class="padding-vertical-5">
 							<div class="mat-body-2">Timestamp:</div>
-							<div class="mat-caption">{{ chat.timestamp }}</div>
-						</div>
-						<mat-divider></mat-divider>
-						<div class="padding-vertical-5">
-							<div class="mat-body-2">ResultCode:</div>
-							<div class="mat-caption">{{ chat.resultCode }}</div>
-						</div>
-						<mat-divider></mat-divider>
-						<div class="padding-vertical-5">
-							<div class="mat-body-2">Duration:</div>
-							<div class="mat-caption">{{ chat.duration }}</div>
+							<div class="mat-caption">{{ chat.timestamp | date }}</div>
 						</div>
 						<mat-divider></mat-divider>
 						<div class="padding-vertical-5">
@@ -50,16 +53,6 @@
 						<div class="padding-vertical-5">
 							<div class="mat-body-2">Score:</div>
 							<div class="mat-caption">{{ chat.score }}</div>
-						</div>
-						<mat-divider></mat-divider>
-						<div class="padding-vertical-5">
-							<div class="mat-body-2">PerformanceBucket:</div>
-							<div class="mat-caption">{{ chat.performanceBucket }}</div>
-						</div>
-						<mat-divider></mat-divider>
-						<div class="padding-vertical-5">
-							<div class="mat-body-2">Iakpmgpoc:</div>
-							<div class="mat-caption">{{ chat.iakpmgpoc }}</div>
 						</div>
 					</div>
 				</div>
