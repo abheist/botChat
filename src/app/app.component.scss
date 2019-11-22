@@ -1,0 +1,26 @@
+.padding-20 {
+	padding: 20px;
+}
+
+.type-badge {
+	font-size: 12px;
+	color: #ffffffff;
+	padding: 2px 4px;
+	min-width: 14px;
+	background: #010100;
+	border-radius: 46%;
+	text-align: center;
+	margin-left: 5px;
+}
+
+.grey-background {
+	background: rgba(0, 0, 0, 0.04);
+}
+
+.padding-vertical-5 {
+	padding: 5px 0;
+}
+
+::ng-deep .mat-expansion-panel-body {
+	padding: 0 !important;
+}
