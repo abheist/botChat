@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   selectedDate = '';
+  datePickerValue = '';
 
   chats = [
     {
@@ -1590,6 +1591,7 @@ export class AppComponent {
   }
 
   removeFilter() {
+    this.datePickerValue = undefined;
     this.selectedDate = null;
     this.filterChats(null);
   }
