@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   selectedDate = '';
+
   chats = [
     {
       title: 'KPMGTeamBot_German',
