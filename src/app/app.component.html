@@ -1,21 +1,24 @@
 <div fxFlex class="padding-20">
-	<div fxLayout="row" fxLayoutAlign="start stretch">
-		<div style="background: #ffffff; border-radius: 6px;" class="margin-padding-0 mat-elevation-z8">
-			<mat-form-field color="primary" appearance="outline">
-				<input
-					matInput
-					[matDatepicker]="picker"
-					placeholder="Choose a date"
-					(dateInput)="filterChats($event)"
-					[(ngModel)]="datePickerValue"
-				/>
-				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-				<mat-datepicker #picker></mat-datepicker>
-			</mat-form-field>
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<div fxLayout="row" fxLayoutAlign="start center">
+			<div style="background: #ffffff; border-radius: 6px;" class="margin-padding-0 mat-elevation-z8">
+				<mat-form-field color="primary" appearance="outline">
+					<input
+						matInput
+						[matDatepicker]="picker"
+						placeholder="Choose a date"
+						(dateInput)="filterChats($event)"
+						[(ngModel)]="datePickerValue"
+					/>
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<button mat-button (click)="removeFilter()">
+				Clear Filter
+			</button>
 		</div>
-		<button mat-button (click)="removeFilter()">
-			Clear Filter
-		</button>
+		<h2>OSIRIS Bot Chat Session</h2>
 	</div>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between start">
 		<mat-accordion
@@ -28,6 +31,9 @@
 					<mat-panel-title>
 						{{ chat.title }}
 					</mat-panel-title>
+					<mat-panel-description *ngIf="chat.signifier">
+						Type <span class="type-badge">{{ chat.signifier }}</span>
+					</mat-panel-description>
 				</mat-expansion-panel-header>
 				<div class="grey-background">
 					<div style="max-height: 300px; overflow: auto; padding-left: 24px;">
