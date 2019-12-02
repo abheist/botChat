@@ -32,5 +32,23 @@
         "unser",
         "wechselseitige",
         "werden"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "editor.autoIndent": true,
+    "editor.tabSize": 4,
+    "editor.fontLigatures": true,
+    "editor.formatOnType": true,
+    "html.format.endWithNewline": true,
+    "html.format.indentHandlebars": true,
+    "html.format.indentInnerHtml": true,
+    "editor.formatOnPaste": true,
+    "prettier.useTabs": true,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.requireConfig": true,
+    "prettier.configPath": "/home/abhishek/iris/botChat/.prettierrc",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

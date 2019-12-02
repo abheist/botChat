@@ -47,14 +47,68 @@
 							<div class="mat-caption">{{ chat.id }}</div>
 						</div>
 						<mat-divider></mat-divider>
-						<div class="padding-vertical-5">
-							<div class="mat-body-2">Question:</div>
-							<div class="mat-caption">{{ chat.question }}</div>
-						</div>
-						<mat-divider></mat-divider>
-						<div class="padding-vertical-5">
-							<div class="mat-body-2">Answer:</div>
-							<div class="mat-caption">{{ chat.answer }}</div>
+						<div fxLayout="row">
+							<div fxFlex="90">
+								<div class="padding-vertical-5">
+									<div class="mat-body-2">Question:</div>
+									<div class="mat-caption">{{ chat.question }}</div>
+								</div>
+								<mat-divider></mat-divider>
+								<div class="padding-vertical-5">
+									<div class="mat-body-2">Answer:</div>
+									<div class="mat-caption">{{ chat.answer }}</div>
+								</div>
+							</div>
+							<div>
+								<button mat-icon-button [matMenuTriggerFor]="menu">
+									<mat-icon>chevron_right</mat-icon>
+								</button>
+								<mat-menu #menu="matMenu">
+									<div (click)="$event.stopPropagation()">
+										<p style="padding: 0 16px; font-weight: 700;">Question's Intent</p>
+										<mat-divider></mat-divider>
+										<div style="padding: 10px 16px;">
+											<div style="padding: 7px;">What are SNPs?</div>
+											<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+												<mat-form-field appearance="outline">
+													<mat-label>Select Intent</mat-label>
+													<mat-select>
+														<mat-option
+															*ngFor="let intent of dropdownMenu"
+															[value]="intent.value"
+														>
+															{{ intent.viewValue }}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+												<button mat-icon-button>
+													<mat-icon>save</mat-icon>
+												</button>
+											</div>
+										</div>
+										<mat-divider></mat-divider>
+										<div style="padding: 10px 16px;">
+											<div style="padding: 7px;">What are SNPs?</div>
+											<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+												<mat-form-field appearance="outline">
+													<mat-label>Select Intent</mat-label>
+													<mat-select>
+														<mat-option
+															*ngFor="let intent of dropdownMenu"
+															[value]="intent.value"
+														>
+															{{ intent.viewValue }}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+												<button mat-icon-button>
+													<mat-icon>save</mat-icon>
+												</button>
+											</div>
+										</div>
+									</div>
+								</mat-menu>
+							</div>
 						</div>
 						<mat-divider></mat-divider>
 						<div class="padding-vertical-5">
