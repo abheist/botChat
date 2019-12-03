@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   selectedDate = '';
   datePickerValue = '';
+  defaultScore = 'p';
 
   chats = [
     {
@@ -2603,6 +2604,7 @@ export class AppComponent {
       sentiment: 'Sentiment(polarity=0.0, subjectivity=0.0)',
     }
   ];
+
   dropdownMenu = [
     { value: 'sentinal', viewValue: 'Sentinal' },
     { value: 'gup', viewValue: 'GUP' },
@@ -2614,7 +2616,9 @@ export class AppComponent {
     { value: 'all', viewValue: 'All' }
   ];
 
+
   allChats = this.chats;
+
 
   filterChats(event) {
     if (event != null && event.value != null) {
@@ -2624,10 +2628,23 @@ export class AppComponent {
     }
   }
 
+  filterWithScore() {
+    // this.filterChats();
+    const chats = this.allChats;
+    if (this.defaultScore) {
+      if (this.defaultScore === 'p') {
+        this.allChats = chats.filter(chat => chat.score <= 50);
+      }
+      if (this.defaultScore === 'all') {
+        this.allChats = this.chats;
+      }
+    }
+  }
+
   removeFilter() {
     this.datePickerValue = undefined;
     this.selectedDate = null;
-    this.filterChats(null);
+    this.filterChats();
   }
 
 }

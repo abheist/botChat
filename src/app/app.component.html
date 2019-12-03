@@ -15,8 +15,8 @@
 			</mat-form-field>
 			<mat-form-field  color="primary" appearance="outline">
 				<mat-label>Score Level</mat-label>
-				<mat-select>
-					<mat-option *ngFor="let score of scores" [value]="score.value">
+				<mat-select [(value)]="defaultScore" (selectionChange)="filterWithScore()">
+					<mat-option *ngFor="let score of scores" [value]="score.value" >
 						{{ score.viewValue }}
 					</mat-option>
 				</mat-select>
@@ -35,7 +35,7 @@
 						<span class="type-badge red" *ngIf="chat.score <= 50">P</span>
 						<span class="type-badge green" *ngIf="chat.score > 50">OK</span>
 					</mat-panel-title>
-					<mat-panel-description> Score: {{ chat.score }} </mat-panel-description>
+					<mat-panel-description> Avg. chat score: {{ chat.score }} </mat-panel-description>
 				</mat-expansion-panel-header>
 				<div class="grey-background">
 					<div style="max-height: 300px; overflow: auto; padding-left: 24px;">
@@ -70,27 +70,7 @@
 										<p style="padding: 0 16px; font-weight: 700;">Question's Intent</p>
 										<mat-divider></mat-divider>
 										<div style="padding: 10px 16px;">
-											<div style="padding: 7px;">What are SNPs?</div>
-											<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-												<mat-form-field appearance="outline">
-													<mat-label>Select Intent</mat-label>
-													<mat-select>
-														<mat-option
-															*ngFor="let intent of dropdownMenu"
-															[value]="intent.value"
-														>
-															{{ intent.viewValue }}
-														</mat-option>
-													</mat-select>
-												</mat-form-field>
-												<button mat-icon-button>
-													<mat-icon>save</mat-icon>
-												</button>
-											</div>
-										</div>
-										<mat-divider></mat-divider>
-										<div style="padding: 10px 16px;">
-											<div style="padding: 7px;">What are SNPs?</div>
+											<div style="padding: 7px;">{{chat.question}}</div>
 											<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
 												<mat-form-field appearance="outline">
 													<mat-label>Select Intent</mat-label>
