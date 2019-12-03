@@ -7,10 +7,17 @@
 	color: #ffffffff;
 	padding: 2px 4px;
 	min-width: 14px;
-	background: #010100;
 	border-radius: 46%;
 	text-align: center;
 	margin-left: 5px;
+}
+
+.red {
+	background: red;
+}
+
+.green {
+	background: green;
 }
 
 .grey-background {
@@ -28,4 +35,21 @@
 ::ng-deep .mat-form-field-wrapper {
 	margin: 0 !important;
 	padding: 0 !important;
+}
+
+::ng-deep .mat-expansion-panel {
+	box-shadow: none !important;
+	border: 1px solid #dadce0;
+}
+
+::ng-deep .mat-expansion-panel:hover {
+	// box-shadow: 2px 3px 15px rgba(0,0,0,0.06) !important;
+}
+
+::ng-deep .mat-accordion {
+	box-shadow: 5px 5px 1px 0 rgba(46, 61, 73, 0.2);
+}
+
+::ng-deep .mat-accordion:hover {
+	box-shadow: 2px 4px 4px 0 rgba(46, 61, 73, 0.2);
 }

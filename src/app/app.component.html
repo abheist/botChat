@@ -1,39 +1,41 @@
 <div fxFlex class="padding-20">
 	<div fxLayout="row" fxLayoutAlign="space-between center">
-		<div fxLayout="row" fxLayoutAlign="start center">
-			<div style="background: #ffffff; border-radius: 6px;" class="margin-padding-0 mat-elevation-z8">
-				<mat-form-field color="primary" appearance="outline">
-					<input
-						matInput
-						[matDatepicker]="picker"
-						placeholder="Choose a date"
-						(dateInput)="filterChats($event)"
-						[(ngModel)]="datePickerValue"
-					/>
-					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-					<mat-datepicker #picker></mat-datepicker>
-				</mat-form-field>
-			</div>
-			<button mat-button (click)="removeFilter()">
-				Clear Filter
-			</button>
+		<h2>IRIS KPMG Risk Advisory</h2>
+		<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+			<mat-form-field color="primary" appearance="outline">
+				<input
+					matInput
+					[matDatepicker]="picker"
+					placeholder="Choose a date"
+					(dateInput)="filterChats($event)"
+					[(ngModel)]="datePickerValue"
+				/>
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+			<mat-form-field  color="primary" appearance="outline">
+				<mat-label>Favorite food</mat-label>
+				<mat-select>
+					<mat-option *ngFor="let food of dropdownMenu" [value]="food.value">
+						{{ food.viewValue }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
 		</div>
-		<h2>OSIRIS Bot Chat Session</h2>
 	</div>
 	<div fxLayout="row wrap" fxLayoutAlign="space-between start">
 		<mat-accordion
 			style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;"
 			*ngFor="let chat of allChats"
-			class="mat-elevation-z5"
+			class="mat-elevation-z0"
 		>
 			<mat-expansion-panel>
 				<mat-expansion-panel-header>
 					<mat-panel-title>
-						{{ chat.title }}
+						<span class="type-badge red" *ngIf="chat.score <= 50">P</span>
+						<span class="type-badge green" *ngIf="chat.score > 50">OK</span>
 					</mat-panel-title>
-					<mat-panel-description *ngIf="chat.signifier">
-						Type <span class="type-badge">{{ chat.signifier }}</span>
-					</mat-panel-description>
+					<mat-panel-description> Score: {{ chat.score }} </mat-panel-description>
 				</mat-expansion-panel-header>
 				<div class="grey-background">
 					<div style="max-height: 300px; overflow: auto; padding-left: 24px;">
