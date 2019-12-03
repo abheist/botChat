@@ -2609,6 +2609,11 @@ export class AppComponent {
     { value: 'none', viewValue: 'None' }
   ];
 
+  scores = [
+    { value: 'p', viewValue: 'P' },
+    { value: 'all', viewValue: 'All' }
+  ];
+
   allChats = this.chats;
 
   filterChats(event) {

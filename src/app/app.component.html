@@ -14,10 +14,10 @@
 				<mat-datepicker #picker></mat-datepicker>
 			</mat-form-field>
 			<mat-form-field  color="primary" appearance="outline">
-				<mat-label>Favorite food</mat-label>
+				<mat-label>Score Level</mat-label>
 				<mat-select>
-					<mat-option *ngFor="let food of dropdownMenu" [value]="food.value">
-						{{ food.viewValue }}
+					<mat-option *ngFor="let score of scores" [value]="score.value">
+						{{ score.viewValue }}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
