@@ -62,12 +62,12 @@
 								</div>
 							</div>
 							<div>
-								<button mat-icon-button [matMenuTriggerFor]="menu">
+								<button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
 									<mat-icon>chevron_right</mat-icon>
 								</button>
 								<mat-menu #menu="matMenu">
 									<div (click)="$event.stopPropagation()">
-										<p style="padding: 0 16px; font-weight: 700;">Question's Intent</p>
+										<p style="padding: 0 16px; font-weight: 700;">Add to Intent</p>
 										<mat-divider></mat-divider>
 										<div style="padding: 10px 16px;">
 											<div style="padding: 7px;">{{chat.question}}</div>
@@ -83,7 +83,7 @@
 														</mat-option>
 													</mat-select>
 												</mat-form-field>
-												<button mat-icon-button>
+												<button mat-icon-button (click)="saveTheData(); menuTrigger.closeMenu()">
 													<mat-icon>save</mat-icon>
 												</button>
 											</div>

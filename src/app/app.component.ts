@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor (private _snackBar: MatSnackBar) { }
   selectedDate = '';
   datePickerValue = '';
   defaultScore = 'p';
@@ -2622,14 +2624,19 @@ export class AppComponent {
 
   filterChats(event) {
     if (event != null && event.value != null) {
-      this.allChats = this.chats.filter(chat => new Date(chat.timestamp).getTime() === new Date(event.value).getTime());
+      this.allChats = this.chats.filter(chat => {
+        console.log(new Date(chat.timestamp).getTime());
+        console.log(new Date(event.value).getTime());
+        return new Date(chat.timestamp).getDate() === new Date(event.value).getDate();
+      }
+      );
+      console.log(this.allChats);
     } else {
       this.allChats = this.chats;
     }
   }
 
   filterWithScore() {
-    // this.filterChats();
     const chats = this.allChats;
     if (this.defaultScore) {
       if (this.defaultScore === 'p') {
@@ -2641,10 +2648,14 @@ export class AppComponent {
     }
   }
 
+  saveTheData() {
+    this._snackBar.open('Saved!', 'Close');
+  }
+
   removeFilter() {
     this.datePickerValue = undefined;
     this.selectedDate = null;
-    this.filterChats();
+    this.filterChats(null);
   }
 
 }
