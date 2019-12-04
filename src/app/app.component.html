@@ -7,7 +7,7 @@
 					matInput
 					[matDatepicker]="picker"
 					placeholder="Choose a date"
-					(dateInput)="filterChats($event)"
+					(dateInput)="filter()"
 					[(ngModel)]="datePickerValue"
 				/>
 				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -15,7 +15,7 @@
 			</mat-form-field>
 			<mat-form-field  color="primary" appearance="outline">
 				<mat-label>Score Level</mat-label>
-				<mat-select [(value)]="defaultScore" (selectionChange)="filterWithScore()">
+				<mat-select [(value)]="defaultScore" (selectionChange)="filter()">
 					<mat-option *ngFor="let score of scores" [value]="score.value" >
 						{{ score.viewValue }}
 					</mat-option>
@@ -74,7 +74,7 @@
 											<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
 												<mat-form-field appearance="outline">
 													<mat-label>Select Intent</mat-label>
-													<mat-select>
+													<mat-select [(ngModel)]="chat.intent">
 														<mat-option
 															*ngFor="let intent of dropdownMenu"
 															[value]="intent.value"
@@ -83,7 +83,7 @@
 														</mat-option>
 													</mat-select>
 												</mat-form-field>
-												<button mat-icon-button (click)="saveTheData(); menuTrigger.closeMenu()">
+												<button mat-icon-button (click)="saveTheData(chat.id); menuTrigger.closeMenu()">
 													<mat-icon>save</mat-icon>
 												</button>
 											</div>

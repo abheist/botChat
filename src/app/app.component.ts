@@ -8,9 +8,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AppComponent {
   constructor (private _snackBar: MatSnackBar) { }
-  selectedDate = '';
-  datePickerValue = '';
-  defaultScore = 'p';
+  selectedDate = null;
+  datePickerValue = null;
+  defaultScore = null;
 
   chats = [
     {
@@ -2607,6 +2607,7 @@ export class AppComponent {
     }
   ];
 
+  allChats = this.chats;
   dropdownMenu = [
     { value: 'sentinal', viewValue: 'Sentinal' },
     { value: 'gup', viewValue: 'GUP' },
@@ -2619,43 +2620,55 @@ export class AppComponent {
   ];
 
 
-  allChats = this.chats;
+  addIntent(chatId, intentValue) {
+    this.chats
+      .filter(chat => chat.id === chatId)
+      .map(chat => ({ ...chat, intent: intentValue }));
+  }
 
-
-  filterChats(event) {
-    if (event != null && event.value != null) {
-      this.allChats = this.chats.filter(chat => {
-        console.log(new Date(chat.timestamp).getTime());
-        console.log(new Date(event.value).getTime());
-        return new Date(chat.timestamp).getDate() === new Date(event.value).getDate();
-      }
-      );
-      console.log(this.allChats);
+  filterWithDate(chats, dateValue) {
+    if (dateValue != null) {
+      return chats.filter(chat => {
+        return new Date(chat.timestamp).getDate() === new Date(dateValue).getDate();
+      });
     } else {
-      this.allChats = this.chats;
+      return chats;
     }
   }
 
-  filterWithScore() {
-    const chats = this.allChats;
-    if (this.defaultScore) {
-      if (this.defaultScore === 'p') {
-        this.allChats = chats.filter(chat => chat.score <= 50);
+  filterWithScore(chats, score) {
+    if (score) {
+      if (score === 'p') {
+        return chats.filter(chat => chat.score <= 50);
       }
-      if (this.defaultScore === 'all') {
-        this.allChats = this.chats;
+      if (score === 'all') {
+        return chats;
       }
     }
   }
 
-  saveTheData() {
+  filter() {
+    let newChats = this.chats;
+    if (this.datePickerValue != null && this.defaultScore != null) {
+      newChats = this.filterWithDate(newChats, this.datePickerValue);
+      newChats = this.filterWithScore(newChats, this.defaultScore);
+    } else if (this.datePickerValue != null) {
+      newChats = this.filterWithDate(newChats, this.datePickerValue);
+    } else if (this.defaultScore != null) {
+      newChats = this.filterWithScore(newChats, this.defaultScore);
+    }
+    this.allChats = newChats;
+  }
+
+  saveTheData(chatId, intentValue) {
+    this.addIntent(chatId, intentValue)
     this._snackBar.open('Saved!', 'Close');
   }
 
   removeFilter() {
     this.datePickerValue = undefined;
     this.selectedDate = null;
-    this.filterChats(null);
+    this.allChats = this.chats;
   }
 
 }
