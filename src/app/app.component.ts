@@ -35,7 +35,6 @@ export class AppComponent {
   }
 
   filterWithDate(chats, dateValue) {
-    console.log(dateValue);
     if (dateValue != null) {
       return chats.filter(chat => {
         return new Date(chat.timestamp).getDate() === new Date(dateValue).getDate();
