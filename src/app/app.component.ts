@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import ChatsJson from '../assets/chats.json';
+import { HttpClient } from '@angular/common/http';
+import { FileSaverService } from 'ngx-filesaver';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,14 @@ import ChatsJson from '../assets/chats.json';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor (private _snackBar: MatSnackBar) { }
+  constructor (
+    private _snackBar: MatSnackBar,
+    private _FileSaverService: FileSaverService,
+  ) { }
+
   selectedDate = null;
   datePickerValue = null;
   defaultScore = null;
-
   chats = ChatsJson;
 
   allChats = this.chats;
@@ -32,6 +37,13 @@ export class AppComponent {
     this.chats
       .filter(chat => chat.id === chatId)
       .map(chat => ({ ...chat, intent: intentValue }));
+  }
+
+  downloadData() {
+    const fileName = `chats.json`;
+    const fileType = this._FileSaverService.genType(fileName);
+    const txtBlob = new Blob([JSON.stringify(this.chats)], { type: fileType });
+    this._FileSaverService.save(txtBlob, fileName);
   }
 
   filterWithDate(chats, dateValue) {

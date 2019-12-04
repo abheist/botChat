@@ -1,3 +1,4 @@
+import { FileSaverModule } from 'ngx-filesaver';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,7 +15,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FileSaverModule
   ],
   providers: [],
   bootstrap: [AppComponent]
