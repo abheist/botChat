@@ -96,7 +96,9 @@ export class AppComponent {
 
   saveTheData(chatId, intentValue) {
     this.addIntent(chatId, intentValue)
-    this._snackBar.open('Saved!', 'Close');
+    this._snackBar.open('Saved!', 'Close', {
+      duration: 500,
+    });
   }
 
   removeFilter() {
