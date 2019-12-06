@@ -118,22 +118,13 @@
 			</div>
 		</mat-tab>
 		<mat-tab label="Management Dashboard">
-			<mat-tab-group mat-align-tabs="center" color="primary" style="background: #fff;">
-				<mat-tab
-					mat-stretch-tabs
-					class="second-nav"
-					*ngFor="let report of dashboards"
-					label="{{ report.name }}"
-				>
-					<iframe
+			<iframe
 						width="100%"
 						class="height-dashboard"
-						[src]="report.url | safe"
+						[src]="dashboard.url | safe"
 						frameborder="0"
 						allowFullScreen="true"
 					></iframe>
-				</mat-tab>
-			</mat-tab-group>
 		</mat-tab>
 	</mat-tab-group>
 </div>

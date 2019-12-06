@@ -32,16 +32,10 @@ export class AppComponent {
     { value: 'all', viewValue: 'All' }
   ];
 
-  dashboards = [
-    {
-      name: 'Management View',
-      url: 'https://app.powerbi.com/reportEmbed?reportId=085fbb23-24ee-4b31-82e0-d784713b319f&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
-    },
-    {
-      name: 'Administrator View',
-      url: 'https://app.powerbi.com/reportEmbed?reportId=085fbb23-24ee-4b31-82e0-d784713b319f&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
-    }
-  ];
+  dashboard = {
+    name: 'Management View',
+    url: 'https://app.powerbi.com/reportEmbed?reportId=085fbb23-24ee-4b31-82e0-d784713b319f&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
+  };
 
   // azureDashboardLink = 'https://portal.azure.com/#@ssaadminssainfosystems.onmicrosoft.com/dashboard/arm/subscriptions/401e0ead-f474-4d6a-a107-b970d52fd8cc/resourcegroups/ia_resourcdgroup/providers/microsoft.portal/dashboards/f358923d-747c-4eff-a0a8-252356c6b8a7-dashboard';
   azureDashboardLink = 'http://stackoverflow.com';
