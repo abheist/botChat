@@ -1,5 +1,5 @@
 <div>
-	<mat-tab-group mat-align-tabs="center">
+	<mat-tab-group mat-align-tabs="center" color="primary">
 		<mat-tab label="DS Dashboard">
 			<div fxFlex>
 				<div fxLayout="row" fxLayoutAlign="space-between center" class="padding-0-20">
@@ -30,7 +30,7 @@
 					</div>
 				</div>
 				<mat-divider></mat-divider>
-				<div fxLayout="row wrap" fxLayoutAlign="space-between start">
+				<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
 					<mat-accordion
 						style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;"
 						*ngFor="let chat of allChats"
