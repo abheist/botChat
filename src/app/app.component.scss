@@ -42,6 +42,8 @@
 	border: 1px solid #dadce0;
 }
 
+
+
 ::ng-deep .mat-expansion-panel:hover {
 	// box-shadow: 2px 3px 15px rgba(0,0,0,0.06) !important;
 }
@@ -61,3 +63,19 @@
 .padding-0-20 {
 	padding: 0 20px;
 }
+
+.mainBoxStyle{
+	border-radius: 5px;
+    border: 1px solid #d0c1c1;
+    background: #e2e2e2;
+    margin: 30px 10px;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {  padding: 0.6em 0px !important;}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: #673ab7;
+}
+.downloadbutton-style{
+	 margin-bottom: -61px;
+}; 
+

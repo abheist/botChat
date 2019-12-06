@@ -10,7 +10,7 @@ import { FileSaverService } from 'ngx-filesaver';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor (
+  constructor(
     private _snackBar: MatSnackBar,
     private _FileSaverService: FileSaverService,
   ) { }
@@ -22,11 +22,9 @@ export class AppComponent {
 
   allChats = this.chats;
   dropdownMenu = [
-    { value: 'greetings', viewValue: 'Greetings' },
-    { value: 'san', viewValue: 'SAN' },
-    { value: 'engagingParties', viewValue: 'Engaging Parties' },
-    { value: 'validity', viewValue: 'Validity' },
+    { value: 'sentinal', viewValue: 'Sentinal' },
     { value: 'gup', viewValue: 'GUP' },
+    { value: 'none', viewValue: 'None' }
   ];
 
   scores = [

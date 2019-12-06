@@ -6,12 +6,7 @@
 					<h2>Intent Mapper</h2>
 					<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
 						<mat-form-field color="primary" appearance="outline">
-							<input
-								matInput
-								[matDatepicker]="picker"
-								placeholder="Choose a date"
-								(dateInput)="filter()"
-								[(ngModel)]="datePickerValue"
+							<input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateInput)="filter()" [(ngModel)]="datePickerValue"
 							/>
 							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 							<mat-datepicker #picker></mat-datepicker>
@@ -24,18 +19,15 @@
 								</mat-option>
 							</mat-select>
 						</mat-form-field>
-						<button mat-icon-button (click)="downloadData()">
+						<button mat-mini-fab (click)="downloadData()" class="downloadbutton-style" color="primary">
 							<mat-icon>cloud_download</mat-icon>
 						</button>
 					</div>
 				</div>
 				<mat-divider></mat-divider>
-				<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
-					<mat-accordion
-						style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;"
-						*ngFor="let chat of allChats"
-						class="mat-elevation-z0"
-					>
+				<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20 mainBoxStyle">
+					<mat-accordion style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;" *ngFor="let chat of allChats"
+					 class="mat-elevation-z0">
 						<mat-expansion-panel>
 							<mat-expansion-panel-header>
 								<mat-panel-title>
@@ -64,11 +56,7 @@
 											</div>
 										</div>
 										<div>
-											<button
-												mat-icon-button
-												[matMenuTriggerFor]="menu"
-												#menuTrigger="matMenuTrigger"
-											>
+											<button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
 												<mat-icon>chevron_right</mat-icon>
 											</button>
 											<mat-menu #menu="matMenu">
@@ -77,26 +65,16 @@
 													<mat-divider></mat-divider>
 													<div style="padding: 10px 16px;">
 														<div style="padding: 7px;">{{ chat.question }}</div>
-														<div
-															fxLayout="row"
-															fxLayoutAlign="start center"
-															fxLayoutGap="5px"
-														>
+														<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
 															<mat-form-field appearance="outline">
 																<mat-label>Select Intent</mat-label>
 																<mat-select [(ngModel)]="chat.intent">
-																	<mat-option
-																		*ngFor="let intent of dropdownMenu"
-																		[value]="intent.value"
-																	>
+																	<mat-option *ngFor="let intent of dropdownMenu" [value]="intent.value">
 																		{{ intent.viewValue }}
 																	</mat-option>
 																</mat-select>
 															</mat-form-field>
-															<button
-																mat-icon-button
-																(click)="saveTheData(chat.id); menuTrigger.closeMenu()"
-															>
+															<button mat-icon-button (click)="saveTheData(chat.id); menuTrigger.closeMenu()">
 																<mat-icon>save</mat-icon>
 															</button>
 														</div>
@@ -118,13 +96,7 @@
 			</div>
 		</mat-tab>
 		<mat-tab label="Management Dashboard">
-			<iframe
-						width="100%"
-						class="height-dashboard"
-						[src]="dashboard.url | safe"
-						frameborder="0"
-						allowFullScreen="true"
-					></iframe>
+			<iframe width="100%" class="height-dashboard" [src]="dashboard.url | safe" frameborder="0" allowFullScreen="true"></iframe>
 		</mat-tab>
 	</mat-tab-group>
 </div>
