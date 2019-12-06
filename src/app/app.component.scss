@@ -82,10 +82,27 @@
     margin: 30px 10px;
 }
 
+::ng-deep .mat-tab-header{
+	box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+	z-index: 3;
+}
 ::ng-deep .mat-form-field-flex > .mat-form-field-infix {  padding: 0.6em 0px !important;}
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-    color: #673ab7;
+    color: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: black;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: black!important;
+}
+
+::ng-deep .mat-focused .mat-form-field-placeholder{
+ color: black
 }
 .downloadbutton-style{
-	 margin-bottom: -61px;
+	margin-bottom: -75px;
 }; 
