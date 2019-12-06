@@ -2,7 +2,12 @@
 	<mat-tab-group mat-align-tabs="center" color="primary" backgroundColor="primary" class="mat-elevation-6">
 		<mat-tab label="DS Dashboard">
 			<div fxFlex>
-				<div fxLayout="row" fxLayoutAlign="space-between center" class="padding-0-20" style="height: 80px; background: #3f51b5;">
+				<div
+					fxLayout="row"
+					fxLayoutAlign="space-between center"
+					class="padding-0-20"
+					style="height: 80px; background: #3f51b5;"
+				>
 					<h2 class="white mat-title">Intent Mapper</h2>
 					<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
 						<mat-form-field color="primary" appearance="outline">
@@ -114,12 +119,12 @@
 		</mat-tab>
 		<mat-tab label="Management Dashboard">
 			<iframe
-						width="100%"
-						class="height-dashboard"
-						[src]="dashboard.url | safe"
-						frameborder="0"
-						allowFullScreen="true"
-					></iframe>
+				width="100%"
+				class="height-dashboard"
+				[src]="dashboard.url | safe"
+				frameborder="0"
+				allowFullScreen="true"
+			></iframe>
 		</mat-tab>
 	</mat-tab-group>
 </div>
