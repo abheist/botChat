@@ -22,9 +22,11 @@ export class AppComponent {
 
   allChats = this.chats;
   dropdownMenu = [
-    { value: 'sentinal', viewValue: 'Sentinal' },
+    { value: 'greetings', viewValue: 'Greetings' },
+    { value: 'san', viewValue: 'SAN' },
+    { value: 'engagingParties', viewValue: 'Engaging Parties' },
+    { value: 'validity', viewValue: 'Validity' },
     { value: 'gup', viewValue: 'GUP' },
-    { value: 'none', viewValue: 'None' }
   ];
 
   scores = [
