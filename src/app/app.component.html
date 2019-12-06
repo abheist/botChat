@@ -1,7 +1,7 @@
 <div>
 	<mat-tab-group mat-align-tabs="center" color="primary" backgroundColor="primary" class="mat-elevation-20">
 		<mat-tab label="DS Dashboard">
-			<mat-tab-group mat-align-tabs="center" color="primary">
+			<mat-tab-group mat-align-tabs="center" color="primary" class="no-shadow">
 				<mat-tab label="Intent Mapper">
 					<div fxFlex>
 						<div fxLayout="row" fxLayoutAlign="space-between center" class="padding-0-20" style="height: 80px; background:#e2e2e2;">
@@ -30,7 +30,7 @@
 							</div>
 						</div>
 						<mat-divider></mat-divider>
-						<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20 mainBoxStyle">
+						<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
 							<mat-accordion style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;" *ngFor="let chat of allChats"
 							 class="mat-elevation-z0">
 								<mat-expansion-panel>
