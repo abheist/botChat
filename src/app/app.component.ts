@@ -78,7 +78,6 @@ export class AppComponent  implements OnInit{
   }
 
   onSubmit(){
-    console.log("form.value",this.myForm.value);
     localStorage.setItem("data",JSON.stringify(this.myForm.value));
   }
 
