@@ -79,7 +79,7 @@
 																			</mat-option>
 																		</mat-select>
 																	</mat-form-field>
-																	<button mat-icon-button (click)="saveTheData(chat.id); menuTrigger.closeMenu()">
+																	<button mat-icon-buttofn (click)="saveTheData(chat.id); menuTrigger.closeMenu()">
 																		<mat-icon>save</mat-icon>
 																	</button>
 																</div>
@@ -98,10 +98,116 @@
 				<mat-tab label="Dashboard">
 					<iframe width="100%" class="height-dashboard" [src]="subdashboard.url | safe" frameborder="0" allowFullScreen="true"></iframe>
 				</mat-tab>
+				<mat-tab label="Self Learning">
+					<!-- <div class="guided-model-wrapper">
+						<div style="width:600px;">
+
+						</div>
+					</div> -->
+					<section class="new-training" fxLayout fxLayoutAlign="center" style="margin:20px;">
+							<mat-card fxFlex="1000px" style="padding:0;box-shadow: 0 7px 5px 0px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;">
+								<mat-card-header style="background: #cec4c4;position: relative;">
+										<mat-card-title>
+												<div class="row" style="width:100%;display: flex;">
+												  <h3 style="margin:10px"> Guided Model Configurations</h3>
+												  <mat-icon style="justify-content: flex-end">settings</mat-icon>
+												</div>
+											   </mat-card-title>
+								</mat-card-header>
+							 
+							  <hr style="margin:0"/>
+
+							  <mat-card-content>
+								<form fxLayout="row" [formGroup]="myForm"  class="self-learning">
+									<div fxLayout="column" style="width:236px;margin: 10px;">
+										<label>No Of Iterations</label>
+										<mat-form-field color="primary" appearance="outline">
+											<input matInput formControlName="nOfIterations" type="number" placeholder="No Of Iterations"  min="10">
+										</mat-form-field>
+									</div>
+									<div fxLayout="column" style="width:236px;margin: 10px;">
+											<label>No. Of Top Words</label>
+											<mat-form-field color="primary" appearance="outline">
+												<input matInput type="number" formControlName="nOfTopWords" placeholder="No Of Top Words"  min="10">
+											</mat-form-field>
+										</div>
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Refresh</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="refresh" placeholder="Refresh"  min="10">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Seed Confidence</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="seedConfidence" placeholder="Seed Confidence"  min="10">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Minimum Sentence Length</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="minSentenceLength" placeholder="Minimum Sentence Length"  min="10">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Chat Data Below Confidence Score</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="cBelConfScore" placeholder="Chat Data Below Confidence Score" step=".01"  min="0">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Select Date</label>
+												<mat-form-field color="primary" appearance="outline">
+														<input matInput [matDatepicker]="picker1"  formControlName="date" placeholder="Choose a date">
+														<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+														<mat-datepicker #picker1></mat-datepicker>
+												</mat-form-field>
+											</div>
+									
+								</form>
+
+							  </mat-card-content>
+							  <!-- <mat-card-actions> -->
+								  <div class="row" style="justify-content: flex-end;padding: 10px;">
+									  <div class="column">
+											<button (click)="onSubmit()" mat-raised-button style="background: #4db53f;color:#fff">Train Model</button>
+									  </div>
+								  </div>
+									
+							  <!-- </mat-card-actions> -->
+							</mat-card>
+					</section>
+					<!-- <mat-card class="guided-model-wrapper">
+						<mat-card-header>
+								<mat-card-title>Guided Model Configurations</mat-card-title>
+						</mat-card-header>
+						
+						<mat-card-content>
+							<form>
+								<table class="example-full-width" cellspacing="0">
+									<tr>
+										<td>
+												<mat-form-field class="demo-full-width">    
+														<input matInput placeholder="First Name">    
+													</mat-form-field>
+										</td>
+									</tr>
+										
+								</table>
+								
+							</form>
+						</mat-card-content>
+					</mat-card> -->
+				</mat-tab>
 			</mat-tab-group>
 		</mat-tab>
 		<mat-tab label="Management Dashboard">
 			<iframe width="100%" class="height-dashboard" [src]="dashboard.url | safe" frameborder="0" allowFullScreen="true"></iframe>
 		</mat-tab>
+		
 	</mat-tab-group>
 </div>

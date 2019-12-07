@@ -1,19 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import ChatsJson from '../assets/chats.json';
 import { HttpClient } from '@angular/common/http';
 import { FileSaverService } from 'ngx-filesaver';
+import { MatCardModule } from '@angular/material';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
   constructor(
     private _snackBar: MatSnackBar,
     private _FileSaverService: FileSaverService,
+    private fb: FormBuilder
   ) { }
+  myForm:FormGroup;
 
   selectedDate = null;
   datePickerValue = null;
@@ -48,6 +52,35 @@ export class AppComponent {
 
   // azureDashboardLink = 'https://portal.azure.com/#@ssaadminssainfosystems.onmicrosoft.com/dashboard/arm/subscriptions/401e0ead-f474-4d6a-a107-b970d52fd8cc/resourcegroups/ia_resourcdgroup/providers/microsoft.portal/dashboards/f358923d-747c-4eff-a0a8-252356c6b8a7-dashboard';
   azureDashboardLink = 'http://stackoverflow.com';
+
+  ngOnInit(){
+    this.myForm = this.fb.group({
+      nOfIterations: '',
+      nOfTopWords: '',
+      refresh: '',
+      seedConfidence: '',
+      minSentenceLength: '',
+      cBelConfScore: '',
+      date:''
+    });
+
+    let selfLearningData = JSON.parse(localStorage.getItem("data")); 
+    if(selfLearningData){
+      this.myForm.controls['nOfIterations'].setValue(selfLearningData['nOfIterations']);
+      this.myForm.controls['nOfTopWords'].setValue(selfLearningData['nOfTopWords']);
+      this.myForm.controls['refresh'].setValue(selfLearningData['refresh']);
+      this.myForm.controls['seedConfidence'].setValue(selfLearningData['seedConfidence']);
+      this.myForm.controls['minSentenceLength'].setValue(selfLearningData['minSentenceLength']);
+      this.myForm.controls['cBelConfScore'].setValue(selfLearningData['cBelConfScore']);
+      this.myForm.controls['date'].setValue(selfLearningData['date']);
+    }
+    console.log("selfLearningData",selfLearningData);
+  }
+
+  onSubmit(){
+    console.log("form.value",this.myForm.value);
+    localStorage.setItem("data",JSON.stringify(this.myForm.value));
+  }
 
 
   addIntent(chatId, intentValue) {
