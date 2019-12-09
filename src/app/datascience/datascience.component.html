@@ -3,33 +3,65 @@
 		<div fxFlex>
 			<div
 				fxLayout="row"
-				fxLayoutAlign="end center"
-				fxLayoutGap="20px"
+				fxLayoutAlign="space-between center"
 				style="height: 64px; background:#e2e2e2;"
 				class="padding-0-20"
 			>
-				<mat-form-field color="primary" appearance="outline">
-					<input
-						matInput
-						[matDatepicker]="picker"
-						placeholder="Choose a date"
-						(dateInput)="filter()"
-						[(ngModel)]="datePickerValue"
-					/>
-					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-					<mat-datepicker #picker></mat-datepicker>
-				</mat-form-field>
-				<mat-form-field color="primary" appearance="outline">
-					<mat-label>Score Level</mat-label>
-					<mat-select [(value)]="defaultScore" (selectionChange)="filter()">
-						<mat-option *ngFor="let score of scores" [value]="score.value">
-							{{ score.viewValue }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
-				<button mat-mini-fab (click)="downloadData()" class="downloadbutton-style" color="primary">
-					<mat-icon>cloud_download</mat-icon>
-				</button>
+				<div fxLayout="column" fxLayoutAlign="start start">
+					<p class="mat-body-2" style="margin: 0; padding: 0;">
+						Console to map chat exceptions to right intent:
+					</p>
+					<div class="clearfix">
+						<div style="list-style: none;">
+							<div style="float: left; margin-right: 10px; ">
+								<span
+									style="border: 1px solid #ccc; 
+									float: left; 
+									width: 12px; 
+									height: 12px; 
+									margin: 0 2px;
+									background-color: green;"
+								></span>
+								Chat Score > 50%
+							</div>
+							<div style="float: left; margin-right: 10px; ">
+								<span
+									style="border: 1px solid #ccc; 
+									float: left; 
+									width: 12px; 
+									height: 12px; 
+									margin: 0 2px;
+									background-color: red;"
+								></span>
+								Chat Score < 50%
+							</div>
+						</div>
+					</div>
+				</div>
+				<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+					<mat-form-field color="primary" appearance="outline">
+						<input
+							matInput
+							[matDatepicker]="picker"
+							placeholder="Choose a date"
+							(dateInput)="filter()"
+							[(ngModel)]="datePickerValue"
+						/>
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-datepicker #picker></mat-datepicker>
+					</mat-form-field>
+					<mat-form-field color="primary" appearance="outline">
+						<mat-label>Score Level</mat-label>
+						<mat-select [(value)]="defaultScore" (selectionChange)="filter()">
+							<mat-option *ngFor="let score of scores" [value]="score.value">
+								{{ score.viewValue }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<button mat-mini-fab (click)="downloadData()" class="downloadbutton-style" color="primary">
+						<mat-icon>cloud_download</mat-icon>
+					</button>
+				</div>
 			</div>
 			<mat-divider></mat-divider>
 			<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
@@ -113,7 +145,7 @@
 	<mat-tab label="Dashboard">
 		<iframe
 			width="100%"
-			style="height: calc(100% - 176px);"
+			style="height: calc(100vh - 116px);"
 			[src]="subdashboard.url | safe"
 			frameborder="0"
 			allowFullScreen="true"
