@@ -1,1 +1,6 @@
 @import '../styles.scss';
+
+.mat-toolbar {
+  position: relative;
+  z-index: 2;
+}

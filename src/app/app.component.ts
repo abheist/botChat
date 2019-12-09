@@ -17,5 +17,4 @@ export class AppComponent implements OnInit {
       path: 'management'
     },
   ];
-
 }
