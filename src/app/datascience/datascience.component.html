@@ -153,122 +153,93 @@
 	</mat-tab>
 	<mat-tab label="Self Learning">
 		<section class="new-training" fxLayout fxLayoutAlign="center" style="margin:20px;">
-			<mat-card
-				fxFlex="1000px"
-				style="padding:0;box-shadow: 0 7px 5px 0px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;"
-			>
-				<mat-card-header style="background: #cec4c4;position: relative;">
+			<mat-card fxFlex="70">
+				<mat-card-header>
 					<mat-card-title>
-						<div class="row" style="width:100%;display: flex;">
 							<h3 style="margin:10px">Guided Model Configurations</h3>
-							<mat-icon style="justify-content: flex-end">settings</mat-icon>
-						</div>
 					</mat-card-title>
 				</mat-card-header>
-
-				<hr style="margin:0" />
-
 				<mat-card-content>
-					<form fxLayout="row" [formGroup]="myForm" class="self-learning">
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>No Of Iterations</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									formControlName="nOfIterations"
-									type="number"
-									placeholder="No Of Iterations"
-									min="10"
-								/>
-							</mat-form-field>
-						</div>
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>No. Of Top Words</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									type="number"
-									formControlName="nOfTopWords"
-									placeholder="No Of Top Words"
-									min="10"
-								/>
-							</mat-form-field>
-						</div>
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>Refresh</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									type="number"
-									formControlName="refresh"
-									placeholder="Refresh"
-									min="10"
-								/>
-							</mat-form-field>
-						</div>
+					<form fxLayout="row wrap" fxLayoutAlign="space-around center" [formGroup]="myForm" fxLayoutGap="20px" class="margin-child-20" style="padding: 20px;">
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>No Of Iterations</mat-label>
+							<input
+								matInput
+								formControlName="nOfIterations"
+								type="number"
+								placeholder="No Of Iterations"
+								min="10"
+							/>
+						</mat-form-field>
 
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>Seed Confidence</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									type="number"
-									formControlName="seedConfidence"
-									placeholder="Seed Confidence"
-									min="10"
-								/>
-							</mat-form-field>
-						</div>
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>No. Of Top Words</mat-label>
+							<input
+								matInput
+								type="number"
+								formControlName="nOfTopWords"
+								placeholder="No Of Top Words"
+								min="10"
+							/>
+						</mat-form-field>
 
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>Minimum Sentence Length</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									type="number"
-									formControlName="minSentenceLength"
-									placeholder="Minimum Sentence Length"
-									min="10"
-								/>
-							</mat-form-field>
-						</div>
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>Refresh</mat-label>
+							<input matInput type="number" formControlName="refresh" placeholder="Refresh" min="10" />
+						</mat-form-field>
 
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>Chat Data Below Confidence Score</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									type="number"
-									formControlName="cBelConfScore"
-									placeholder="Chat Data Below Confidence Score"
-									step=".01"
-									min="0"
-								/>
-							</mat-form-field>
-						</div>
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>Seed Confidence</mat-label>
+							<input
+								matInput
+								type="number"
+								formControlName="seedConfidence"
+								placeholder="Seed Confidence"
+								min="10"
+							/>
+						</mat-form-field>
 
-						<div fxLayout="column" style="width:236px;margin: 10px;">
-							<label>Select Date</label>
-							<mat-form-field color="primary" appearance="outline">
-								<input
-									matInput
-									[matDatepicker]="picker1"
-									formControlName="date"
-									placeholder="Choose a date"
-								/>
-								<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-								<mat-datepicker #picker1></mat-datepicker>
-							</mat-form-field>
-						</div>
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>Minimum Sentence Length</mat-label>
+							<input
+								matInput
+								type="number"
+								formControlName="minSentenceLength"
+								placeholder="Minimum Sentence Length"
+								min="10"
+							/>
+						</mat-form-field>
+
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>Chat Data Below Confidence Score</mat-label>
+							<input
+								matInput
+								type="number"
+								formControlName="cBelConfScore"
+								placeholder="Chat Data Below Confidence Score"
+								step=".01"
+								min="0"
+							/>
+						</mat-form-field>
+
+						<mat-form-field color="primary" appearance="outline" fxFlex="30">
+							<mat-label>Select Date</mat-label>
+							<input
+								matInput
+								[matDatepicker]="picker1"
+								formControlName="date"
+								placeholder="Choose a date"
+							/>
+							<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+							<mat-datepicker #picker1></mat-datepicker>
+						</mat-form-field>
 					</form>
 				</mat-card-content>
-				<div class="row" style="justify-content: flex-end;padding: 10px;">
-					<div class="column">
-						<button (click)="onSubmit()" mat-raised-button style="background: #4db53f;color:#fff">
+				<mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+						<button (click)="onSubmit()" mat-raised-button color="primary">
 							Train Model
 						</button>
-					</div>
-				</div>
+				</mat-card-actions>
 			</mat-card>
 		</section>
 	</mat-tab>
