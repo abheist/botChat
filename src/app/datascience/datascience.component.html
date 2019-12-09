@@ -1,126 +1,203 @@
-<mat-tab-group mat-align-tabs="center" color="primary">
-	<mat-tab label="Intent Mapper">
-		<div fxFlex>
-			<div
-				fxLayout="row"
-				fxLayoutAlign="space-between center"
-				class="padding-0-20"
-				style="height: 80px; background:#e2e2e2;"
-			>
-				<div
-					style="height: 100%; width: 200px; background: url('../assets/KPMG_logo.svg'); background-size: 70%; background-repeat: no-repeat; background-position: left center;"
-				></div>
-				<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-					<mat-form-field color="primary" appearance="outline">
-						<input
-							matInput
-							[matDatepicker]="picker"
-							placeholder="Choose a date"
-							(dateInput)="filter()"
-							[(ngModel)]="datePickerValue"
-						/>
-						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-						<mat-datepicker #picker></mat-datepicker>
-					</mat-form-field>
-					<mat-form-field color="primary" appearance="outline">
-						<mat-label>Score Level</mat-label>
-						<mat-select [(value)]="defaultScore" (selectionChange)="filter()">
-							<mat-option *ngFor="let score of scores" [value]="score.value">
-								{{ score.viewValue }}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-					<button mat-mini-fab (click)="downloadData()" class="downloadbutton-style" color="primary">
-						<mat-icon>cloud_download</mat-icon>
-					</button>
-				</div>
-			</div>
-			<mat-divider></mat-divider>
-			<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
-				<mat-accordion
-					style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;"
-					*ngFor="let chat of allChats"
-					class="mat-elevation-z0"
-				>
-					<mat-expansion-panel>
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-								<span class="type-badge red" *ngIf="chat.score <= 50">P</span>
-								<span class="type-badge green" *ngIf="chat.score > 50">OK</span>
-							</mat-panel-title>
-							<mat-panel-description> Avg. chat score: {{ chat.score }} </mat-panel-description>
-						</mat-expansion-panel-header>
-						<div class="grey-background">
-							<div style="max-height: 300px; overflow: auto; padding-left: 24px;">
-								<div class="padding-vertical-5">
-									<div class="mat-body-2">Date:</div>
-									<div class="mat-caption">{{ chat.timestamp | date }}</div>
-								</div>
-								<mat-divider></mat-divider>
-								<div fxLayout="row">
-									<div fxFlex="90">
-										<div class="padding-vertical-5">
-											<div class="mat-body-2">Question:</div>
-											<div class="mat-caption">{{ chat.question }}</div>
-										</div>
-										<mat-divider></mat-divider>
-										<div class="padding-vertical-5">
-											<div class="mat-body-2">Answer:</div>
-											<div class="mat-caption">{{ chat.answer }}</div>
-										</div>
-									</div>
-									<div>
-										<button
-											mat-icon-button
-											[matMenuTriggerFor]="menu"
-											#menuTrigger="matMenuTrigger"
-										>
-											<mat-icon>chevron_right</mat-icon>
-										</button>
-										<mat-menu #menu="matMenu">
-											<div (click)="$event.stopPropagation()">
-												<p style="padding: 0 16px; font-weight: 700;">Add to Intent</p>
-												<mat-divider></mat-divider>
-												<div style="padding: 10px 16px;">
-													<div style="padding: 7px;">{{ chat.question }}</div>
-													<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-														<mat-form-field appearance="outline">
-															<mat-label>Select Intent</mat-label>
-															<mat-select [(ngModel)]="chat.intent">
-																<mat-option
-																	*ngFor="let intent of dropdownMenu"
-																	[value]="intent.value"
-																>
-																	{{ intent.viewValue }}
-																</mat-option>
-															</mat-select>
-														</mat-form-field>
-														<button
-															mat-icon-button
-															(click)="saveTheData(chat.id); menuTrigger.closeMenu()"
-														>
-															<mat-icon>save</mat-icon>
-														</button>
-													</div>
-												</div>
-											</div>
-										</mat-menu>
-									</div>
-								</div>
+<mat-tab-group mat-align-tabs="center" color="primary" class="no-shadow">
+				<mat-tab label="Intent Mapper">
+					<div fxFlex>
+						<div fxLayout="row" fxLayoutAlign="space-between center" class="padding-0-20" style="height: 80px; background:#e2e2e2;">
+							<div style="height: 100%; width: 200px; background: url('../assets/KPMG_logo.svg'); background-size: 70%; background-repeat: no-repeat; background-position: left center;"></div>
+							<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+								<mat-form-field color="primary" appearance="outline">
+									<input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateInput)="filter()" [(ngModel)]="datePickerValue"
+									/>
+									<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+									<mat-datepicker #picker></mat-datepicker>
+								</mat-form-field>
+								<mat-form-field color="primary" appearance="outline">
+									<mat-label>Score Level</mat-label>
+									<mat-select [(value)]="defaultScore" (selectionChange)="filter()">
+										<mat-option *ngFor="let score of scores" [value]="score.value">
+											{{ score.viewValue }}
+										</mat-option>
+									</mat-select>
+								</mat-form-field>
+								<!-- <button mat-icon-button (click)="downloadData()">
+												<mat-icon>cloud_download</mat-icon>
+											</button> -->
+								<button mat-mini-fab (click)="downloadData()" class="downloadbutton-style" color="primary">
+									<mat-icon>cloud_download</mat-icon>
+								</button>
 							</div>
 						</div>
-					</mat-expansion-panel>
-				</mat-accordion>
-			</div>
-		</div>
-	</mat-tab>
-	<mat-tab label="Dashboard">
-		<iframe
-			width="100%"
-			class="height-dashboard"
-			[src]="subdashboard.url | safe"
-			frameborder="0"
-			allowFullScreen="true"
-		></iframe>
-	</mat-tab>
-</mat-tab-group>
+						<mat-divider></mat-divider>
+						<div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
+							<mat-accordion style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;" *ngFor="let chat of allChats"
+							 class="mat-elevation-z0">
+								<mat-expansion-panel>
+									<mat-expansion-panel-header>
+										<mat-panel-title>
+											<span class="type-badge red" *ngIf="chat.score <= 50">P</span>
+											<span class="type-badge green" *ngIf="chat.score > 50">OK</span>
+										</mat-panel-title>
+										<mat-panel-description> Avg. chat score: {{ chat.score }} </mat-panel-description>
+									</mat-expansion-panel-header>
+									<div class="grey-background">
+										<div style="max-height: 300px; overflow: auto; padding-left: 24px;">
+											<div class="padding-vertical-5">
+												<div class="mat-body-2">Date:</div>
+												<div class="mat-caption">{{ chat.timestamp | date }}</div>
+											</div>
+											<mat-divider></mat-divider>
+											<div fxLayout="row">
+												<div fxFlex="90">
+													<div class="padding-vertical-5">
+														<div class="mat-body-2">Question:</div>
+														<div class="mat-caption">{{ chat.question }}</div>
+													</div>
+													<mat-divider></mat-divider>
+													<div class="padding-vertical-5">
+														<div class="mat-body-2">Answer:</div>
+														<div class="mat-caption">{{ chat.answer }}</div>
+													</div>
+												</div>
+												<div>
+													<button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+														<mat-icon>chevron_right</mat-icon>
+													</button>
+													<mat-menu #menu="matMenu">
+														<div (click)="$event.stopPropagation()">
+															<p style="padding: 0 16px; font-weight: 700;">Add to Intent</p>
+															<mat-divider></mat-divider>
+															<div style="padding: 10px 16px;">
+																<div style="padding: 7px;">{{ chat.question }}</div>
+																<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+																	<mat-form-field appearance="outline">
+																		<mat-label>Select Intent</mat-label>
+																		<mat-select [(ngModel)]="chat.intent">
+																			<mat-option *ngFor="let intent of dropdownMenu" [value]="intent.value">
+																				{{ intent.viewValue }}
+																			</mat-option>
+																		</mat-select>
+																	</mat-form-field>
+																	<button mat-icon-buttofn (click)="saveTheData(chat.id); menuTrigger.closeMenu()">
+																		<mat-icon>save</mat-icon>
+																	</button>
+																</div>
+															</div>
+														</div>
+													</mat-menu>
+												</div>
+											</div>
+										</div>
+									</div>
+								</mat-expansion-panel>
+							</mat-accordion>
+						</div>
+					</div>
+				</mat-tab>
+				<mat-tab label="Dashboard">
+					<iframe width="100%" class="height-dashboard" [src]="subdashboard.url | safe" frameborder="0" allowFullScreen="true"></iframe>
+				</mat-tab>
+				<mat-tab label="Self Learning">
+					<!-- <div class="guided-model-wrapper">
+						<div style="width:600px;">
+
+						</div>
+					</div> -->
+					<section class="new-training" fxLayout fxLayoutAlign="center" style="margin:20px;">
+							<mat-card fxFlex="1000px" style="padding:0;box-shadow: 0 7px 5px 0px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;">
+								<mat-card-header style="background: #cec4c4;position: relative;">
+										<mat-card-title>
+												<div class="row" style="width:100%;display: flex;">
+												  <h3 style="margin:10px"> Guided Model Configurations</h3>
+												  <mat-icon style="justify-content: flex-end">settings</mat-icon>
+												</div>
+											   </mat-card-title>
+								</mat-card-header>
+							 
+							  <hr style="margin:0"/>
+
+							  <mat-card-content>
+								<form fxLayout="row" [formGroup]="myForm"  class="self-learning">
+									<div fxLayout="column" style="width:236px;margin: 10px;">
+										<label>No Of Iterations</label>
+										<mat-form-field color="primary" appearance="outline">
+											<input matInput formControlName="nOfIterations" type="number" placeholder="No Of Iterations"  min="10">
+										</mat-form-field>
+									</div>
+									<div fxLayout="column" style="width:236px;margin: 10px;">
+											<label>No. Of Top Words</label>
+											<mat-form-field color="primary" appearance="outline">
+												<input matInput type="number" formControlName="nOfTopWords" placeholder="No Of Top Words"  min="10">
+											</mat-form-field>
+										</div>
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Refresh</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="refresh" placeholder="Refresh"  min="10">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Seed Confidence</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="seedConfidence" placeholder="Seed Confidence"  min="10">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Minimum Sentence Length</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="minSentenceLength" placeholder="Minimum Sentence Length"  min="10">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Chat Data Below Confidence Score</label>
+												<mat-form-field color="primary" appearance="outline">
+													<input matInput type="number" formControlName="cBelConfScore" placeholder="Chat Data Below Confidence Score" step=".01"  min="0">
+												</mat-form-field>
+											</div>
+
+										<div fxLayout="column"  style="width:236px;margin: 10px;">
+												<label>Select Date</label>
+												<mat-form-field color="primary" appearance="outline">
+														<input matInput [matDatepicker]="picker1"  formControlName="date" placeholder="Choose a date">
+														<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+														<mat-datepicker #picker1></mat-datepicker>
+												</mat-form-field>
+											</div>
+									
+								</form>
+
+							  </mat-card-content>
+							  <!-- <mat-card-actions> -->
+								  <div class="row" style="justify-content: flex-end;padding: 10px;">
+									  <div class="column">
+											<button (click)="onSubmit()" mat-raised-button style="background: #4db53f;color:#fff">Train Model</button>
+									  </div>
+								  </div>
+									
+							  <!-- </mat-card-actions> -->
+							</mat-card>
+					</section>
+					<!-- <mat-card class="guided-model-wrapper">
+						<mat-card-header>
+								<mat-card-title>Guided Model Configurations</mat-card-title>
+						</mat-card-header>
+						
+						<mat-card-content>
+							<form>
+								<table class="example-full-width" cellspacing="0">
+									<tr>
+										<td>
+												<mat-form-field class="demo-full-width">    
+														<input matInput placeholder="First Name">    
+													</mat-form-field>
+										</td>
+									</tr>
+										
+								</table>
+								
+							</form>
+						</mat-card-content>
+					</mat-card> -->
+				</mat-tab>
+			</mat-tab-group>

@@ -37,7 +37,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-
 .padding-20 {
 	padding: 20px;
 }
@@ -149,4 +148,15 @@ body {
 }
 .downloadbutton-style{
 	margin-bottom: -75px;
-}; 
+};
+
+.guided-model-wrapper{
+	max-width: 1000px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+.self-learning{
+	flex-wrap: wrap;
+}
+
