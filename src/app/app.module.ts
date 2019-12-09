@@ -10,7 +10,7 @@ import { PipeModule } from './pipes/pipe.module';
 import { RouterModule } from '@angular/router';
 import { DatascienceComponent } from './datascience/datascience.component';
 import { ManagementComponent } from './management/management.component';
-import appRoutes from './routerConfig';
+import { appRoutes } from './routerConfig';
 
 @NgModule({
   declarations: [
