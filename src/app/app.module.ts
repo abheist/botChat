@@ -7,10 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PipeModule } from './pipes/pipe.module';
+import { RouterModule } from '@angular/router';
+import { DatascienceComponent } from './datascience/datascience.component';
+import { ManagementComponent } from './management/management.component';
+import appRoutes from './routerConfig';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DatascienceComponent,
+    ManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +24,9 @@ import { PipeModule } from './pipes/pipe.module';
     MaterialModule,
     FlexLayoutModule,
     FileSaverModule,
-    PipeModule
+    PipeModule,
+    RouterModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
