@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { DatascienceComponent } from './datascience/datascience.component';
 import { ManagementComponent } from './management/management.component';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
     { path: '', redirectTo: '/ds', pathMatch: 'full' },
     {
         path: 'ds',
@@ -13,4 +13,3 @@ const appRoutes: Routes = [
         component: ManagementComponent
     }
 ];
-export default appRoutes;
