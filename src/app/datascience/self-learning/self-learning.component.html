@@ -1,0 +1,128 @@
+<section fxLayoutAlign="center" style="margin:20px;">
+    <mat-card fxFlex="70">
+        <mat-card-header>
+            <mat-card-title>
+                <h3 style="margin:10px">Guided Model Configurations</h3>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form fxLayout="row wrap" fxLayoutAlign="space-around center" [formGroup]="myForm" fxLayoutGap="20px" class="margin-child-20"
+                style="padding: 20px;">
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>No Of Iterations</mat-label>
+                    <input matInput formControlName="nOfIterations" type="number" placeholder="No Of Iterations" min="10" />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>No. Of Top Words</mat-label>
+                    <input matInput type="number" formControlName="nOfTopWords" placeholder="No Of Top Words" min="10" />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>Refresh</mat-label>
+                    <input matInput type="number" formControlName="refresh" placeholder="Refresh" min="10" />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>Seed Confidence</mat-label>
+                    <input matInput type="number" formControlName="seedConfidence" placeholder="Seed Confidence" min="10" />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>Minimum Sentence Length</mat-label>
+                    <input matInput type="number" formControlName="minSentenceLength" placeholder="Minimum Sentence Length" min="10" />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>Chat Data Below Confidence Score</mat-label>
+                    <input matInput type="number" formControlName="cBelConfScore" placeholder="Chat Data Below Confidence Score" step=".01" min="0"
+                    />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30">
+                    <mat-label>Select Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="date" placeholder="Choose a date" />
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+            <button (click)="onSubmit()" mat-raised-button color="primary">
+                Train Model
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</section>
+
+<section fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="70" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+        <mat-form-field color="primary" appearance="outline">
+            <mat-label>Add New Category</mat-label>
+            <input matInput type="text" [(ngModel)]="addCategoryValue" placeholder="Add Category" min="10" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addNote(addCategoryValue)">
+            <mat-icon class="material-icons">note_add</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="saveCategory()">
+            <mat-icon class="material-icons">save</mat-icon>
+        </button>
+    </div>
+</section>
+
+<section style="margin-bottom: 20px;" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <div fxFlex="70" style="margin-bottom: 20px;" fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="20px" class="margin-child-card-20">
+        <mat-card fxFlex="33" *ngFor="let category of addCategory">
+            <mat-card-header>
+                <mat-card-title>{{ category.categoryName }}</mat-card-title>
+                <button mat-icon-button (click)="deleteCategory(category.categoryName)">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                </button>
+            </mat-card-header>
+            <mat-card-content>
+                <div>
+                    <mat-chip-list #chipList aria-label="Fruit selection">
+                        <mat-chip *ngFor="let subCat of category.subCategory" (removed)="deleteSubCategory(category.categoryName, subCat)">
+                            {{ subCat }}
+                            <mat-icon matChipRemove color="primary">delete</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </mat-card-content>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+                <mat-form-field color="primary" class="addTextField" appearance="outline">
+                    <input matInput type="text" [(ngModel)]="addSubCategoryValue[category.categoryName]" placeholder="Add Category" min="10"
+                    />
+                </mat-form-field>
+                <button mat-mini-fab color="primary" (click)="addSubCategory(category.categoryName, addSubCategoryValue[category.categoryName])">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+</section>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card fxFlex="70">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="Sentences">
+                <th mat-header-cell *matHeaderCellDef>Sentences</th>
+                <td mat-cell *matCellDef="let element">{{ element.Sentences }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="intent">
+                <th mat-header-cell *matHeaderCellDef>Intent</th>
+                <td mat-cell *matCellDef="let element">{{ element.intent }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="probability">
+                <th mat-header-cell *matHeaderCellDef>Probability</th>
+                <td mat-cell *matCellDef="let element">{{ element.probability }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </mat-card>
+</div>

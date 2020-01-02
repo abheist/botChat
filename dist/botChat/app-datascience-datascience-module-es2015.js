@@ -1,0 +1,935 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app-datascience-datascience-module"],{
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/dashboard/dashboard.component.html":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/dashboard/dashboard.component.html ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<iframe width=\"100%\" style=\"height: calc(100vh - 116px);\" [src]=\"subdashboard.url | safe\" frameborder=\"0\" allowFullScreen=\"true\"></iframe>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/datascience.component.html":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/datascience.component.html ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-tab-group mat-align-tabs=\"center\" color=\"primary\" backgroundColor=\"primary\">\r\n\t<mat-tab label=\"Intent Mapper\">\r\n\t\t<ng-template matTabContent>\r\n\t\t\t<app-intent-mapper></app-intent-mapper>\r\n\t\t</ng-template>\r\n\t</mat-tab>\r\n\t<mat-tab label=\"Dashboard\">\r\n\t\t<ng-template matTabContent>\r\n\t\t\t<app-dashboard></app-dashboard>\r\n\t\t</ng-template>\r\n\r\n\t</mat-tab>\r\n\t<mat-tab label=\"Self Learning\">\r\n\t\t<ng-template matTabContent>\r\n\t\t\t<app-self-learning></app-self-learning>\r\n\t\t</ng-template>\r\n\t</mat-tab>\r\n</mat-tab-group>\r\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/intent-mapper/intent-mapper.component.html":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/intent-mapper/intent-mapper.component.html ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div fxFlex>\n    <div fxLayout=\"row\" fxLayoutAlign=\"space-between center\" style=\"height: 64px; background:#e2e2e2;\" class=\"padding-0-20\">\n        <div fxLayout=\"column\" fxLayoutAlign=\"start start\">\n            <p class=\"mat-body-2\" style=\"margin: 0; padding: 0;\">\n                Console to map chat exceptions to right intent:\n            </p>\n            <div class=\"clearfix\">\n                <div style=\"list-style: none;\">\n                    <div style=\"float: left; margin-right: 10px; \">\n                        <span style=\"border: 1px solid #ccc; \n\t\t\t\t\t\t\t\t\tfloat: left; \n\t\t\t\t\t\t\t\t\twidth: 12px; \n\t\t\t\t\t\t\t\t\theight: 12px; \n\t\t\t\t\t\t\t\t\tmargin: 0 2px;\n\t\t\t\t\t\t\t\t\tbackground-color: green;\"></span>\n                        Chat Score > 50%\n                    </div>\n                    <div style=\"float: left; margin-right: 10px; \">\n                        <span style=\"border: 1px solid #ccc; \n\t\t\t\t\t\t\t\t\tfloat: left; \n\t\t\t\t\t\t\t\t\twidth: 12px; \n\t\t\t\t\t\t\t\t\theight: 12px; \n\t\t\t\t\t\t\t\t\tmargin: 0 2px;\n\t\t\t\t\t\t\t\t\tbackground-color: red;\"></span>\n                        Chat Score\n                        < 50% </div>\n                    </div>\n                </div>\n            </div>\n            <div fxLayout=\"row\" fxLayoutAlign=\"end center\" fxLayoutGap=\"20px\">\n                <mat-form-field color=\"primary\" appearance=\"outline\">\n                    <input matInput [matDatepicker]=\"picker\" placeholder=\"Choose a date\" (dateInput)=\"filter()\" [(ngModel)]=\"datePickerValue\"\n                    />\n                    <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n                    <mat-datepicker #picker></mat-datepicker>\n                </mat-form-field>\n                <mat-form-field color=\"primary\" appearance=\"outline\">\n                    <mat-label>Score Level</mat-label>\n                    <mat-select [(value)]=\"defaultScore\" (selectionChange)=\"filter()\">\n                        <mat-option *ngFor=\"let score of scores\" [value]=\"score.value\">\n                            {{ score.viewValue }}\n                        </mat-option>\n                    </mat-select>\n                </mat-form-field>\n                <button mat-mini-fab (click)=\"downloadData()\" class=\"downloadbutton-style\" color=\"primary\">\n                    <mat-icon>cloud_download</mat-icon>\n                </button>\n            </div>\n        </div>\n        <mat-divider></mat-divider>\n        <div fxLayout=\"row wrap\" fxLayoutAlign=\"space-between start\" class=\"padding-20\">\n            <mat-accordion style=\"width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;\" *ngFor=\"let chat of allChats\"\n                class=\"mat-elevation-z0\">\n                <mat-expansion-panel>\n                    <mat-expansion-panel-header>\n                        <mat-panel-title>\n                            <span class=\"type-badge red\" *ngIf=\"chat.score <= 50\">P</span>\n                            <span class=\"type-badge green\" *ngIf=\"chat.score > 50\">OK</span>\n                        </mat-panel-title>\n                        <mat-panel-description> Avg. chat score: {{ chat.score }} </mat-panel-description>\n                    </mat-expansion-panel-header>\n                    <div class=\"grey-background\">\n                        <div style=\"max-height: 300px; overflow: auto; padding-left: 24px;\">\n                            <div class=\"padding-vertical-5\">\n                                <div class=\"mat-body-2\">Date:</div>\n                                <div class=\"mat-caption\">{{ chat.timestamp | date }}</div>\n                            </div>\n                            <mat-divider></mat-divider>\n                            <div fxLayout=\"row\">\n                                <div fxFlex=\"90\">\n                                    <div class=\"padding-vertical-5\">\n                                        <div class=\"mat-body-2\">Question:</div>\n                                        <div class=\"mat-caption\">{{ chat.question }}</div>\n                                    </div>\n                                    <mat-divider></mat-divider>\n                                    <div class=\"padding-vertical-5\">\n                                        <div class=\"mat-body-2\">Answer:</div>\n                                        <div class=\"mat-caption\">{{ chat.answer }}</div>\n                                    </div>\n                                </div>\n                                <div>\n                                    <button mat-icon-button [matMenuTriggerFor]=\"menu\" #menuTrigger=\"matMenuTrigger\">\n                                        <mat-icon>chevron_right</mat-icon>\n                                    </button>\n                                    <mat-menu #menu=\"matMenu\">\n                                        <div (click)=\"$event.stopPropagation()\">\n                                            <p style=\"padding: 0 16px; font-weight: 700;\">Add to Intent</p>\n                                            <mat-divider></mat-divider>\n                                            <div style=\"padding: 10px 16px;\">\n                                                <div style=\"padding: 7px;\">{{ chat.question }}</div>\n                                                <div fxLayout=\"row\" fxLayoutAlign=\"start center\" fxLayoutGap=\"5px\">\n                                                    <mat-form-field appearance=\"outline\">\n                                                        <mat-label>Select Intent</mat-label>\n                                                        <mat-select [(ngModel)]=\"chat.intent\">\n                                                            <mat-option *ngFor=\"let intent of dropdownMenu\" [value]=\"intent.value\">\n                                                                {{ intent.viewValue }}\n                                                            </mat-option>\n                                                        </mat-select>\n                                                    </mat-form-field>\n                                                    <button mat-icon-buttofn (click)=\"saveTheData(chat.id); menuTrigger.closeMenu()\">\n                                                        <mat-icon>save</mat-icon>\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </mat-menu>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </mat-expansion-panel>\n            </mat-accordion>\n        </div>\n    </div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/self-learning/self-learning.component.html":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/self-learning/self-learning.component.html ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign=\"center\" style=\"margin:20px;\">\n    <mat-card fxFlex=\"70\">\n        <mat-card-header>\n            <mat-card-title>\n                <h3 style=\"margin:10px\">Guided Model Configurations</h3>\n            </mat-card-title>\n        </mat-card-header>\n        <mat-card-content>\n            <form fxLayout=\"row wrap\" fxLayoutAlign=\"space-around center\" [formGroup]=\"myForm\" fxLayoutGap=\"20px\" class=\"margin-child-20\"\n                style=\"padding: 20px;\">\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>No Of Iterations</mat-label>\n                    <input matInput formControlName=\"nOfIterations\" type=\"number\" placeholder=\"No Of Iterations\" min=\"10\" />\n                </mat-form-field>\n\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>No. Of Top Words</mat-label>\n                    <input matInput type=\"number\" formControlName=\"nOfTopWords\" placeholder=\"No Of Top Words\" min=\"10\" />\n                </mat-form-field>\n\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>Refresh</mat-label>\n                    <input matInput type=\"number\" formControlName=\"refresh\" placeholder=\"Refresh\" min=\"10\" />\n                </mat-form-field>\n\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>Seed Confidence</mat-label>\n                    <input matInput type=\"number\" formControlName=\"seedConfidence\" placeholder=\"Seed Confidence\" min=\"10\" />\n                </mat-form-field>\n\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>Minimum Sentence Length</mat-label>\n                    <input matInput type=\"number\" formControlName=\"minSentenceLength\" placeholder=\"Minimum Sentence Length\" min=\"10\" />\n                </mat-form-field>\n\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>Chat Data Below Confidence Score</mat-label>\n                    <input matInput type=\"number\" formControlName=\"cBelConfScore\" placeholder=\"Chat Data Below Confidence Score\" step=\".01\" min=\"0\"\n                    />\n                </mat-form-field>\n\n                <mat-form-field color=\"primary\" appearance=\"outline\" fxFlex=\"30\">\n                    <mat-label>Select Date</mat-label>\n                    <input matInput [matDatepicker]=\"picker1\" formControlName=\"date\" placeholder=\"Choose a date\" />\n                    <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n                    <mat-datepicker #picker1></mat-datepicker>\n                </mat-form-field>\n            </form>\n        </mat-card-content>\n        <mat-card-actions fxLayout=\"row\" fxLayoutAlign=\"end center\">\n            <button (click)=\"onSubmit()\" mat-raised-button color=\"primary\">\n                Train Model\n            </button>\n        </mat-card-actions>\n    </mat-card>\n</section>\n\n<section fxLayout=\"row\" fxLayoutAlign=\"center center\">\n    <div fxFlex=\"70\" fxLayout=\"row\" fxLayoutAlign=\"end center\" fxLayoutGap=\"20px\">\n        <mat-form-field color=\"primary\" appearance=\"outline\">\n            <mat-label>Add New Category</mat-label>\n            <input matInput type=\"text\" [(ngModel)]=\"addCategoryValue\" placeholder=\"Add Category\" min=\"10\" />\n        </mat-form-field>\n        <button mat-raised-button color=\"primary\" (click)=\"addNote(addCategoryValue)\">\n            <mat-icon class=\"material-icons\">note_add</mat-icon>\n        </button>\n        <button mat-raised-button color=\"primary\" (click)=\"saveCategory()\">\n            <mat-icon class=\"material-icons\">save</mat-icon>\n        </button>\n    </div>\n</section>\n\n<section style=\"margin-bottom: 20px;\" fxLayout=\"row\" fxLayoutAlign=\"center center\" fxLayoutGap=\"20px\">\n    <div fxFlex=\"70\" style=\"margin-bottom: 20px;\" fxLayout=\"row wrap\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"20px\" class=\"margin-child-card-20\">\n        <mat-card fxFlex=\"33\" *ngFor=\"let category of addCategory\">\n            <mat-card-header>\n                <mat-card-title>{{ category.categoryName }}</mat-card-title>\n                <button mat-icon-button (click)=\"deleteCategory(category.categoryName)\">\n                    <mat-icon class=\"material-icons\">delete</mat-icon>\n                </button>\n            </mat-card-header>\n            <mat-card-content>\n                <div>\n                    <mat-chip-list #chipList aria-label=\"Fruit selection\">\n                        <mat-chip *ngFor=\"let subCat of category.subCategory\" (removed)=\"deleteSubCategory(category.categoryName, subCat)\">\n                            {{ subCat }}\n                            <mat-icon matChipRemove color=\"primary\">delete</mat-icon>\n                        </mat-chip>\n                    </mat-chip-list>\n                </div>\n            </mat-card-content>\n\n            <div fxLayout=\"row\" fxLayoutAlign=\"space-between center\" fxLayoutGap=\"10px\">\n                <mat-form-field color=\"primary\" class=\"addTextField\" appearance=\"outline\">\n                    <input matInput type=\"text\" [(ngModel)]=\"addSubCategoryValue[category.categoryName]\" placeholder=\"Add Category\" min=\"10\"\n                    />\n                </mat-form-field>\n                <button mat-mini-fab color=\"primary\" (click)=\"addSubCategory(category.categoryName, addSubCategoryValue[category.categoryName])\">\n                    <mat-icon>add</mat-icon>\n                </button>\n            </div>\n        </mat-card>\n    </div>\n</section>\n\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\">\n    <mat-card fxFlex=\"70\">\n        <table mat-table [dataSource]=\"dataSource\">\n            <ng-container matColumnDef=\"Sentences\">\n                <th mat-header-cell *matHeaderCellDef>Sentences</th>\n                <td mat-cell *matCellDef=\"let element\">{{ element.Sentences }}</td>\n            </ng-container>\n\n            <ng-container matColumnDef=\"intent\">\n                <th mat-header-cell *matHeaderCellDef>Intent</th>\n                <td mat-cell *matCellDef=\"let element\">{{ element.intent }}</td>\n            </ng-container>\n\n            <ng-container matColumnDef=\"probability\">\n                <th mat-header-cell *matHeaderCellDef>Probability</th>\n                <td mat-cell *matCellDef=\"let element\">{{ element.probability }}</td>\n            </ng-container>\n\n            <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n            <tr mat-row *matRowDef=\"let row; columns: displayedColumns\"></tr>\n        </table>\n    </mat-card>\n</div>\n");
+
+/***/ }),
+
+/***/ "./src/app/datascience/dashboard/dashboard.component.scss":
+/*!****************************************************************!*\
+  !*** ./src/app/datascience/dashboard/dashboard.component.scss ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2RhdGFzY2llbmNlL2Rhc2hib2FyZC9kYXNoYm9hcmQuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "./src/app/datascience/dashboard/dashboard.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/datascience/dashboard/dashboard.component.ts ***!
+  \**************************************************************/
+/*! exports provided: DashboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let DashboardComponent = class DashboardComponent {
+    constructor() {
+        this.subdashboard = {
+            name: 'Dashboard View',
+            url: 'https://app.powerbi.com/reportEmbed?reportId=92edb2bb-4709-48a0-ae9f-c52ab713b4be&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
+        };
+    }
+    ngOnInit() {
+    }
+};
+DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-dashboard',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./dashboard.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/dashboard/dashboard.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./dashboard.component.scss */ "./src/app/datascience/dashboard/dashboard.component.scss")).default]
+    })
+], DashboardComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/datascience/datascience.component.scss":
+/*!********************************************************!*\
+  !*** ./src/app/datascience/datascience.component.scss ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".margin-child-20 ::ng-deep.mat-form-field {\n  margin: 20px 0;\n}\n\n.margin-child-card-20 ::ng-deep.mat-card {\n  margin: 20px 0;\n}\n\n.self-learning {\n  flex-wrap: wrap;\n}\n\n.newCategory {\n  padding: 0;\n  box-shadow: 0 7px 5px 0px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;\n  margin: 16px;\n}\n\n.categoryHeader {\n  padding: 2px 8px;\n  display: flex;\n  justify-content: space-between;\n  background: #cec4c4;\n}\n\n.categoryHeader:hover, .subDelIcon:hover {\n  cursor: pointer;\n}\n\n.learningBadge {\n  display: inline-block;\n  min-width: 20px;\n  margin: 2px;\n  font-weight: 700;\n  background-color: #d0cece;\n  color: black;\n  border-radius: 5px;\n  padding: 0px 0px;\n  padding-left: 5px;\n}\n\n.addTextField {\n  width: 240px;\n  background: #fff;\n}\n\n.adderIcon {\n  display: inline-block;\n  padding: 6px 10px;\n  background-color: #eee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\ntable {\n  width: 100%;\n}\n\n.overlay {\n  position: fixed;\n  /* Sit on top of the page content */\n  width: 100%;\n  /* Full width (cover the whole page) */\n  height: 100%;\n  /* Full height (cover the whole page) */\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.5);\n  /* Black background with opacity */\n  z-index: 999;\n  /* Specify a stack order in case you're using a different order for other elements */\n  cursor: pointer;\n  /* Add a pointer on hover */\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGF0YXNjaWVuY2UvQzpcXG9mZmljZVxcY2hhdGJvdFxcYm90Q2hhdC9zcmNcXGFwcFxcZGF0YXNjaWVuY2VcXGRhdGFzY2llbmNlLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9kYXRhc2NpZW5jZS9kYXRhc2NpZW5jZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7QUNDSjs7QURFQTtFQUNJLGNBQUE7QUNDSjs7QURFQTtFQUNDLGVBQUE7QUNDRDs7QURFQTtFQUNDLFVBQUE7RUFDQSx5SEFBQTtFQUNBLFlBQUE7QUNDRDs7QURFQTtFQUNDLGdCQUFBO0VBQ0csYUFBQTtFQUNBLDhCQUFBO0VBQ0EsbUJBQUE7QUNDSjs7QURFQTtFQUNDLGVBQUE7QUNDRDs7QURFQTtFQUNDLHFCQUFBO0VBQ0EsZUFBQTtFQUNBLFdBQUE7RUFDRyxnQkFBQTtFQUNBLHlCQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxpQkFBQTtBQ0NKOztBREdBO0VBQ0MsWUFBQTtFQUNBLGdCQUFBO0FDQUQ7O0FERUE7RUFDQyxxQkFBQTtFQUNHLGlCQUFBO0VBQ0Esc0JBQUE7RUFDQSxzQkFBQTtFQUNBLGtCQUFBO0FDQ0o7O0FESUM7RUFDQyxXQUFBO0FDREY7O0FESUE7RUFDRSxlQUFBO0VBQWlCLG1DQUFBO0VBQ2pCLFdBQUE7RUFBYSxzQ0FBQTtFQUNiLFlBQUE7RUFBYyx1Q0FBQTtFQUNkLE1BQUE7RUFDQSxPQUFBO0VBQ0EsUUFBQTtFQUNBLFNBQUE7RUFDQSxvQ0FBQTtFQUFtQyxrQ0FBQTtFQUNuQyxZQUFBO0VBQWMsb0ZBQUE7RUFDZCxlQUFBO0VBQWlCLDJCQUFBO0FDS25CIiwiZmlsZSI6InNyYy9hcHAvZGF0YXNjaWVuY2UvZGF0YXNjaWVuY2UuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWFyZ2luLWNoaWxkLTIwIDo6bmctZGVlcC5tYXQtZm9ybS1maWVsZCB7XHJcbiAgICBtYXJnaW46IDIwcHggMFxyXG59XHJcblxyXG4ubWFyZ2luLWNoaWxkLWNhcmQtMjAgOjpuZy1kZWVwLm1hdC1jYXJkIHtcclxuICAgIG1hcmdpbjogMjBweCAwO1xyXG59XHJcblxyXG4uc2VsZi1sZWFybmluZ3tcclxuXHRmbGV4LXdyYXA6IHdyYXA7XHJcbn1cclxuXHJcbi5uZXdDYXRlZ29yeXtcclxuXHRwYWRkaW5nOjA7XHJcblx0Ym94LXNoYWRvdzogMCA3cHggNXB4IDBweCByZ2JhKDAsMCwwLC4yKSwgMCAycHggMnB4IDAgcmdiYSgwLDAsMCwuMTQpLCAwIDFweCA1cHggMCByZ2JhKDAsMCwwLC4xMikgIWltcG9ydGFudDtcclxuXHRtYXJnaW46IDE2cHg7XHJcbn1cclxuXHJcbi5jYXRlZ29yeUhlYWRlcntcclxuXHRwYWRkaW5nOiAycHggOHB4O1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGJhY2tncm91bmQ6ICNjZWM0YzQ7XHJcbn1cclxuXHJcbi5jYXRlZ29yeUhlYWRlcjpob3ZlciAsIC5zdWJEZWxJY29uOmhvdmVye1xyXG5cdGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuLmxlYXJuaW5nQmFkZ2V7XHJcblx0ZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG5cdG1pbi13aWR0aDogMjBweDtcclxuXHRtYXJnaW46IDJweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZDBjZWNlO1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gICAgcGFkZGluZzogMHB4IDBweDtcclxuICAgIHBhZGRpbmctbGVmdDogNXB4O1xyXG59XHJcblxyXG5cclxuLmFkZFRleHRGaWVsZHtcclxuXHR3aWR0aDogMjQwcHg7XHJcblx0YmFja2dyb3VuZDogI2ZmZjtcclxufVxyXG4uYWRkZXJJY29ue1xyXG5cdGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIHBhZGRpbmc6IDZweCAxMHB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XHJcbiAgICBib3JkZXItcmFkaXVzOiA0cHg7XHJcbn1cclxuXHJcblxyXG5cclxuXHR0YWJsZXtcclxuXHRcdHdpZHRoOjEwMCU7XHJcblx0fVxyXG5cclxuLm92ZXJsYXl7XHJcbiAgcG9zaXRpb246IGZpeGVkOyAvKiBTaXQgb24gdG9wIG9mIHRoZSBwYWdlIGNvbnRlbnQgKi9cclxuICB3aWR0aDogMTAwJTsgLyogRnVsbCB3aWR0aCAoY292ZXIgdGhlIHdob2xlIHBhZ2UpICovXHJcbiAgaGVpZ2h0OiAxMDAlOyAvKiBGdWxsIGhlaWdodCAoY292ZXIgdGhlIHdob2xlIHBhZ2UpICovXHJcbiAgdG9wOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwwLDAsMC41KTsgLyogQmxhY2sgYmFja2dyb3VuZCB3aXRoIG9wYWNpdHkgKi9cclxuICB6LWluZGV4OiA5OTk7IC8qIFNwZWNpZnkgYSBzdGFjayBvcmRlciBpbiBjYXNlIHlvdSdyZSB1c2luZyBhIGRpZmZlcmVudCBvcmRlciBmb3Igb3RoZXIgZWxlbWVudHMgKi9cclxuICBjdXJzb3I6IHBvaW50ZXI7IC8qIEFkZCBhIHBvaW50ZXIgb24gaG92ZXIgKi9cclxufSIsIi5tYXJnaW4tY2hpbGQtMjAgOjpuZy1kZWVwLm1hdC1mb3JtLWZpZWxkIHtcbiAgbWFyZ2luOiAyMHB4IDA7XG59XG5cbi5tYXJnaW4tY2hpbGQtY2FyZC0yMCA6Om5nLWRlZXAubWF0LWNhcmQge1xuICBtYXJnaW46IDIwcHggMDtcbn1cblxuLnNlbGYtbGVhcm5pbmcge1xuICBmbGV4LXdyYXA6IHdyYXA7XG59XG5cbi5uZXdDYXRlZ29yeSB7XG4gIHBhZGRpbmc6IDA7XG4gIGJveC1zaGFkb3c6IDAgN3B4IDVweCAwcHggcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDJweCAycHggMCByZ2JhKDAsIDAsIDAsIDAuMTQpLCAwIDFweCA1cHggMCByZ2JhKDAsIDAsIDAsIDAuMTIpICFpbXBvcnRhbnQ7XG4gIG1hcmdpbjogMTZweDtcbn1cblxuLmNhdGVnb3J5SGVhZGVyIHtcbiAgcGFkZGluZzogMnB4IDhweDtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBiYWNrZ3JvdW5kOiAjY2VjNGM0O1xufVxuXG4uY2F0ZWdvcnlIZWFkZXI6aG92ZXIsIC5zdWJEZWxJY29uOmhvdmVyIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ubGVhcm5pbmdCYWRnZSB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgbWluLXdpZHRoOiAyMHB4O1xuICBtYXJnaW46IDJweDtcbiAgZm9udC13ZWlnaHQ6IDcwMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2QwY2VjZTtcbiAgY29sb3I6IGJsYWNrO1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG4gIHBhZGRpbmc6IDBweCAwcHg7XG4gIHBhZGRpbmctbGVmdDogNXB4O1xufVxuXG4uYWRkVGV4dEZpZWxkIHtcbiAgd2lkdGg6IDI0MHB4O1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4uYWRkZXJJY29uIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBwYWRkaW5nOiA2cHggMTBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xufVxuXG50YWJsZSB7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4ub3ZlcmxheSB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgLyogU2l0IG9uIHRvcCBvZiB0aGUgcGFnZSBjb250ZW50ICovXG4gIHdpZHRoOiAxMDAlO1xuICAvKiBGdWxsIHdpZHRoIChjb3ZlciB0aGUgd2hvbGUgcGFnZSkgKi9cbiAgaGVpZ2h0OiAxMDAlO1xuICAvKiBGdWxsIGhlaWdodCAoY292ZXIgdGhlIHdob2xlIHBhZ2UpICovXG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgcmlnaHQ6IDA7XG4gIGJvdHRvbTogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjUpO1xuICAvKiBCbGFjayBiYWNrZ3JvdW5kIHdpdGggb3BhY2l0eSAqL1xuICB6LWluZGV4OiA5OTk7XG4gIC8qIFNwZWNpZnkgYSBzdGFjayBvcmRlciBpbiBjYXNlIHlvdSdyZSB1c2luZyBhIGRpZmZlcmVudCBvcmRlciBmb3Igb3RoZXIgZWxlbWVudHMgKi9cbiAgY3Vyc29yOiBwb2ludGVyO1xuICAvKiBBZGQgYSBwb2ludGVyIG9uIGhvdmVyICovXG59Il19 */");
+
+/***/ }),
+
+/***/ "./src/app/datascience/datascience.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/datascience/datascience.component.ts ***!
+  \******************************************************/
+/*! exports provided: DatascienceComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatascienceComponent", function() { return DatascienceComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _shared_header_header_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../shared/header/header.service */ "./src/app/shared/header/header.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _assets_chats_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/chats.json */ "./src/assets/chats.json");
+var _assets_chats_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../assets/chats.json */ "./src/assets/chats.json", 1);
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var ngx_filesaver__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-filesaver */ "./node_modules/ngx-filesaver/fesm2015/ngx-filesaver.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+
+
+
+
+
+
+
+let DatascienceComponent = class DatascienceComponent {
+    constructor(
+    // tslint:disable-next-line: variable-name
+    _snackBar, 
+    // tslint:disable-next-line: variable-name
+    _FileSaverService, fb, headerService) {
+        this._snackBar = _snackBar;
+        this._FileSaverService = _FileSaverService;
+        this.fb = fb;
+        this.headerService = headerService;
+        this.displayedColumns = ['Sentences', 'intent', 'probability'];
+        this.showSpinner = false;
+        this.selectedDate = null;
+        this.datePickerValue = new Date();
+        this.defaultScore = null;
+        this.dataSource = [];
+        this.chats = _assets_chats_json__WEBPACK_IMPORTED_MODULE_3__;
+        this.addCategoryValue = '';
+        this.addSubCategoryValue = { Sentinel: '', GUP: '' };
+        this.dataSourceOriginal = [{ Sentences: 'what is SAN', intent: 'Sentinel', probability: 1.0 },
+            { Sentences: 'san Validity?', intent: 'san-validity', probability: 0.9452662722 },
+            { Sentences: 'What is a GUP?', intent: 'Gup', probability: 0.746031746 },
+            { Sentences: 'SAN', intent: 'Sentinel', probability: 0.5555555556 },
+            { Sentences: 'san engaging parties?', intent: 'engaging_parties', probability: 0.8373015873 },
+            { Sentences: 'what is sam?', intent: 'Gup', probability: 0.9444444444 },
+            { Sentences: 'what is gip', intent: 'Gup', probability: 0.9889807163 },
+            { Sentences: 'can you tell me about gpu ?', intent: 'Gup', probability: 0.7392883079 }];
+        this.dataSourceOriginal1 = [{ Sentences: 'what is SAN', intent: '', probability: 0 },
+            { Sentences: 'san Validity?', intent: '', probability: 0 },
+            { Sentences: 'What is a GUP?', intent: '', probability: 0 },
+            { Sentences: 'SAN', intent: '', probability: 0 },
+            { Sentences: 'san engaging parties?', intent: '', probability: 0 },
+            { Sentences: 'what is sam?', intent: '', probability: 0 },
+            { Sentences: 'what is gip', intent: '', probability: 0 },
+            { Sentences: 'can you tell me about gpu ?', intent: '', probability: 0 }];
+        this.allChats = this.chats;
+        this.dropdownMenu = [
+            { value: 'sentinal', viewValue: 'Sentinel' },
+            { value: 'gup', viewValue: 'GUP' },
+            { value: 'san-validity', viewValue: 'San validity' },
+            { value: 'san-engagement', viewValue: 'San engagement' },
+            { value: 'greetings', viewValue: 'Greetings' }
+        ];
+        this.addCategory = [{ categoryName: 'Sentinel', subCategory: ['Sentinol', 'Sentinql', 'Sentinwl', 'Sentinrl'] },
+            { categoryName: 'GUP', subCategory: ['GQP', 'GWP', 'GEP', 'GRP'] }];
+        this.scores = [
+            { value: 'p', viewValue: 'P' },
+            { value: 'all', viewValue: 'All' }
+        ];
+        this.dashboard = {
+            name: 'Management View',
+            url: 'https://app.powerbi.com/reportEmbed?reportId=085fbb23-24ee-4b31-82e0-d784713b319f&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
+        };
+        this.subdashboard = {
+            name: 'Dashboard View',
+            url: 'https://app.powerbi.com/reportEmbed?reportId=92edb2bb-4709-48a0-ae9f-c52ab713b4be&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
+        };
+    }
+    ngOnInit() {
+        this.headerService.showheaderSubComponents = true;
+        this.myForm = this.fb.group({
+            nOfIterations: '',
+            nOfTopWords: '',
+            refresh: '',
+            seedConfidence: '',
+            minSentenceLength: '',
+            cBelConfScore: '',
+            date: ''
+        });
+        const selfLearningData = JSON.parse(localStorage.getItem('data'));
+        const addCategoryData = JSON.parse(localStorage.getItem('addCategoryData'));
+        if (selfLearningData) {
+            this.myForm.controls.nOfIterations.setValue(selfLearningData.nOfIterations);
+            this.myForm.controls.nOfTopWords.setValue(selfLearningData.nOfTopWords);
+            this.myForm.controls.refresh.setValue(selfLearningData.refresh);
+            this.myForm.controls.seedConfidence.setValue(selfLearningData.seedConfidence);
+            this.myForm.controls.minSentenceLength.setValue(selfLearningData.minSentenceLength);
+            this.myForm.controls.cBelConfScore.setValue(selfLearningData.cBelConfScore);
+            this.myForm.controls.date.setValue(selfLearningData.date);
+        }
+        if (addCategoryData) {
+            this.addCategory = JSON.parse(JSON.stringify(addCategoryData));
+        }
+        this.intentValues = this.addCategory.map(data => {
+            return data.categoryName.toLowerCase();
+        });
+        this.filterFromAddCtegories();
+        console.log('this.intentValues', this.intentValues);
+        console.log('selfLearningData', selfLearningData);
+    }
+    addNote(addCategoryValue) {
+        const obj = { categoryName: addCategoryValue, subCategory: [] };
+        this.addCategory.push(obj);
+        this.intentValues.push(addCategoryValue);
+        console.log(' this.addCategory', this.addCategory);
+    }
+    saveCategory() {
+        this.showSpinner = true;
+        setTimeout(() => {
+            localStorage.setItem('addCategoryData', JSON.stringify(this.addCategory));
+            console.log('this.intentValues final', this.intentValues);
+            // this.filterFromAddCtegories();
+            this.showSpinner = false;
+        }, 2000);
+    }
+    onSubmit() {
+        this.showSpinner = true;
+        setTimeout(() => {
+            localStorage.setItem('data', JSON.stringify(this.myForm.value));
+            console.log('this.intentValues final', this.intentValues);
+            this.filterFromAddCtegories();
+            this.showSpinner = false;
+        }, 3500);
+    }
+    filterFromAddCtegories() {
+        this.dataSource = [];
+        const filteredArr = [];
+        const unfilteredArr = [];
+        const tempArr = JSON.parse(JSON.stringify(this.dataSourceOriginal));
+        if (this.intentValues.length == 0) {
+            this.dataSource = JSON.parse(JSON.stringify(this.dataSourceOriginal1));
+        }
+        else {
+            for (let i = 0; i < this.intentValues.length; i++) {
+                const filterData = this.dataSourceOriginal.filter(data => {
+                    return data.intent.toLowerCase() == this.intentValues[i].toLowerCase();
+                });
+                this.dataSource.push(...filterData); // filtered data
+            }
+        }
+        for (let i = 0; i < this.dataSourceOriginal.length; i++) {
+            const filterData = this.intentValues.filter(data => {
+                return data.toLowerCase() == this.dataSourceOriginal[i].intent.toLowerCase();
+            });
+            if (filterData.length == 0) {
+                // this.dataSource.push(...filterData);
+                // } else {
+                const obj = JSON.parse(JSON.stringify(this.dataSourceOriginal[i]));
+                console.log('obj', obj);
+                obj.intent = '';
+                obj.probability = 0;
+                this.dataSource.push(obj);
+            }
+        }
+    }
+    deleteCategory(categoryName) {
+        for (let i = 0; i < this.addCategory.length; i++) {
+            if (this.addCategory[i].categoryName == categoryName) {
+                this.addCategory.splice(i, 1);
+            }
+        }
+        const intentIndexValue = this.intentValues.indexOf(categoryName);
+        this.intentValues.splice(intentIndexValue, 1);
+        console.log('deleted this.intentValues', this.intentValues);
+    }
+    deleteSubCategory(categoryName, categorySubName) {
+        for (let i = 0; i < this.addCategory.length; i++) {
+            if (this.addCategory[i].categoryName == categoryName) {
+                const subCatIndex = this.addCategory[i].subCategory.indexOf(categorySubName);
+                this.addCategory[i].subCategory.splice(subCatIndex, 1);
+            }
+        }
+    }
+    addSubCategory(categoryName, categorySubValue) {
+        for (let i = 0; i < this.addCategory.length; i++) {
+            if (this.addCategory[i].categoryName == categoryName) {
+                this.addCategory[i].subCategory.push(categorySubValue);
+            }
+        }
+        console.log('this.addCategory', this.addCategory);
+    }
+    addIntent(chatId, intentValue) {
+        this.chats
+            .filter(chat => chat.id === chatId)
+            .map(chat => (Object.assign({}, chat, { intent: intentValue })));
+    }
+    downloadData() {
+        const fileName = `chats.json`;
+        const fileType = this._FileSaverService.genType(fileName);
+        const txtBlob = new Blob([JSON.stringify(this.chats)], { type: fileType });
+        this._FileSaverService.save(txtBlob, fileName);
+    }
+    filterWithDate(chats, dateValue) {
+        if (dateValue != null) {
+            return chats.filter(chat => {
+                return new Date(chat.timestamp).getDate() === new Date(dateValue).getDate();
+            });
+        }
+        else {
+            return chats;
+        }
+    }
+    filterWithScore(chats, score) {
+        if (score) {
+            if (score === 'p') {
+                return chats.filter(chat => chat.score <= 50);
+            }
+            if (score === 'all') {
+                return chats;
+            }
+        }
+    }
+    filter() {
+        let newChats = this.chats;
+        if (this.datePickerValue != null && this.defaultScore != null) {
+            newChats = this.filterWithDate(newChats, this.datePickerValue);
+            newChats = this.filterWithScore(newChats, this.defaultScore);
+        }
+        else if (this.datePickerValue != null) {
+            newChats = this.filterWithDate(newChats, this.datePickerValue);
+        }
+        else if (this.defaultScore != null) {
+            newChats = this.filterWithScore(newChats, this.defaultScore);
+        }
+        this.allChats = newChats;
+    }
+    saveTheData(chatId, intentValue) {
+        this.addIntent(chatId, intentValue);
+        this._snackBar.open('Saved!', 'Close', {
+            duration: 500,
+        });
+    }
+    removeFilter() {
+        this.datePickerValue = undefined;
+        this.selectedDate = null;
+        this.allChats = this.chats;
+    }
+};
+DatascienceComponent.ctorParameters = () => [
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"] },
+    { type: ngx_filesaver__WEBPACK_IMPORTED_MODULE_5__["FileSaverService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] },
+    { type: _shared_header_header_service__WEBPACK_IMPORTED_MODULE_1__["HeaderService"] }
+];
+DatascienceComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-datascience',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./datascience.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/datascience.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./datascience.component.scss */ "./src/app/datascience/datascience.component.scss")).default]
+    })
+], DatascienceComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/datascience/datascience.module.ts":
+/*!***************************************************!*\
+  !*** ./src/app/datascience/datascience.module.ts ***!
+  \***************************************************/
+/*! exports provided: DataScienceModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataScienceModule", function() { return DataScienceModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _shared_material_material_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../shared/material/material.module */ "./src/app/shared/material/material.module.ts");
+/* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm2015/flex-layout.js");
+/* harmony import */ var _datascience_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./datascience.routing-module */ "./src/app/datascience/datascience.routing-module.ts");
+/* harmony import */ var _datascience_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./datascience.component */ "./src/app/datascience/datascience.component.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _pipes_pipe_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pipes/pipe.module */ "./src/app/pipes/pipe.module.ts");
+/* harmony import */ var _intent_mapper_intent_mapper_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./intent-mapper/intent-mapper.component */ "./src/app/datascience/intent-mapper/intent-mapper.component.ts");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/datascience/dashboard/dashboard.component.ts");
+/* harmony import */ var _self_learning_self_learning_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./self-learning/self-learning.component */ "./src/app/datascience/self-learning/self-learning.component.ts");
+
+
+
+
+
+
+
+
+
+
+
+let DataScienceModule = class DataScienceModule {
+};
+DataScienceModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
+        declarations: [
+            _datascience_component__WEBPACK_IMPORTED_MODULE_4__["DatascienceComponent"],
+            _intent_mapper_intent_mapper_component__WEBPACK_IMPORTED_MODULE_8__["IntentMapperComponent"],
+            _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_9__["DashboardComponent"],
+            _self_learning_self_learning_component__WEBPACK_IMPORTED_MODULE_10__["SelfLearningComponent"]
+        ],
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_6__["CommonModule"],
+            _datascience_routing_module__WEBPACK_IMPORTED_MODULE_3__["DataScienceRoutingModule"],
+            _pipes_pipe_module__WEBPACK_IMPORTED_MODULE_7__["PipeModule"],
+            _shared_material_material_module__WEBPACK_IMPORTED_MODULE_1__["MaterialModule"],
+            _angular_flex_layout__WEBPACK_IMPORTED_MODULE_2__["FlexLayoutModule"]
+        ]
+    })
+], DataScienceModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/datascience/datascience.routing-module.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/datascience/datascience.routing-module.ts ***!
+  \***********************************************************/
+/*! exports provided: DataScienceRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataScienceRoutingModule", function() { return DataScienceRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _datascience_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./datascience.component */ "./src/app/datascience/datascience.component.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+
+const routes = [
+    {
+        path: '', component: _datascience_component__WEBPACK_IMPORTED_MODULE_1__["DatascienceComponent"]
+    }
+];
+let DataScienceRoutingModule = class DataScienceRoutingModule {
+};
+DataScienceRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        imports: [
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
+        ],
+        exports: [
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"]
+        ]
+    })
+], DataScienceRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/datascience/intent-mapper/intent-mapper.component.scss":
+/*!************************************************************************!*\
+  !*** ./src/app/datascience/intent-mapper/intent-mapper.component.scss ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".margin-child-20 ::ng-deep.mat-form-field {\n  margin: 20px 0;\n}\n\n.margin-child-card-20 ::ng-deep.mat-card {\n  margin: 20px 0;\n}\n\n.self-learning {\n  flex-wrap: wrap;\n}\n\n.newCategory {\n  padding: 0;\n  box-shadow: 0 7px 5px 0px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;\n  margin: 16px;\n}\n\n.categoryHeader {\n  padding: 2px 8px;\n  display: flex;\n  justify-content: space-between;\n  background: #cec4c4;\n}\n\n.categoryHeader:hover, .subDelIcon:hover {\n  cursor: pointer;\n}\n\n.learningBadge {\n  display: inline-block;\n  min-width: 20px;\n  margin: 2px;\n  font-weight: 700;\n  background-color: #d0cece;\n  color: black;\n  border-radius: 5px;\n  padding: 0px 0px;\n  padding-left: 5px;\n}\n\n.addTextField {\n  width: 240px;\n  background: #fff;\n}\n\n.adderIcon {\n  display: inline-block;\n  padding: 6px 10px;\n  background-color: #eee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\n.spinnerStyle {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 999;\n}\n\ntable {\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGF0YXNjaWVuY2UvaW50ZW50LW1hcHBlci9DOlxcb2ZmaWNlXFxjaGF0Ym90XFxib3RDaGF0L3NyY1xcYXBwXFxkYXRhc2NpZW5jZVxcaW50ZW50LW1hcHBlclxcaW50ZW50LW1hcHBlci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZGF0YXNjaWVuY2UvaW50ZW50LW1hcHBlci9pbnRlbnQtbWFwcGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtBQ0NKOztBREVBO0VBQ0ksY0FBQTtBQ0NKOztBREVBO0VBQ0MsZUFBQTtBQ0NEOztBREVBO0VBQ0MsVUFBQTtFQUNBLHlIQUFBO0VBQ0EsWUFBQTtBQ0NEOztBREVBO0VBQ0MsZ0JBQUE7RUFDRyxhQUFBO0VBQ0EsOEJBQUE7RUFDQSxtQkFBQTtBQ0NKOztBREVBO0VBQ0MsZUFBQTtBQ0NEOztBREVBO0VBQ0MscUJBQUE7RUFDQSxlQUFBO0VBQ0EsV0FBQTtFQUNHLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSxZQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0FDQ0o7O0FER0E7RUFDQyxZQUFBO0VBQ0EsZ0JBQUE7QUNBRDs7QURFQTtFQUNDLHFCQUFBO0VBQ0csaUJBQUE7RUFDQSxzQkFBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURFQTtFQUNDLGVBQUE7RUFDRyxTQUFBO0VBQ0EsUUFBQTtFQUNBLGdDQUFBO0VBQ0EsWUFBQTtBQ0NKOztBREVDO0VBQ0MsV0FBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvZGF0YXNjaWVuY2UvaW50ZW50LW1hcHBlci9pbnRlbnQtbWFwcGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1hcmdpbi1jaGlsZC0yMCA6Om5nLWRlZXAubWF0LWZvcm0tZmllbGQge1xyXG4gICAgbWFyZ2luOiAyMHB4IDBcclxufVxyXG5cclxuLm1hcmdpbi1jaGlsZC1jYXJkLTIwIDo6bmctZGVlcC5tYXQtY2FyZCB7XHJcbiAgICBtYXJnaW46IDIwcHggMDtcclxufVxyXG5cclxuLnNlbGYtbGVhcm5pbmd7XHJcblx0ZmxleC13cmFwOiB3cmFwO1xyXG59XHJcblxyXG4ubmV3Q2F0ZWdvcnl7XHJcblx0cGFkZGluZzowO1xyXG5cdGJveC1zaGFkb3c6IDAgN3B4IDVweCAwcHggcmdiYSgwLDAsMCwuMiksIDAgMnB4IDJweCAwIHJnYmEoMCwwLDAsLjE0KSwgMCAxcHggNXB4IDAgcmdiYSgwLDAsMCwuMTIpICFpbXBvcnRhbnQ7XHJcblx0bWFyZ2luOiAxNnB4O1xyXG59XHJcblxyXG4uY2F0ZWdvcnlIZWFkZXJ7XHJcblx0cGFkZGluZzogMnB4IDhweDtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgICBiYWNrZ3JvdW5kOiAjY2VjNGM0O1xyXG59XHJcblxyXG4uY2F0ZWdvcnlIZWFkZXI6aG92ZXIgLCAuc3ViRGVsSWNvbjpob3ZlcntcclxuXHRjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuXHJcbi5sZWFybmluZ0JhZGdle1xyXG5cdGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuXHRtaW4td2lkdGg6IDIwcHg7XHJcblx0bWFyZ2luOiAycHg7XHJcbiAgICBmb250LXdlaWdodDogNzAwO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2QwY2VjZTtcclxuICAgIGNvbG9yOiBibGFjaztcclxuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICAgIHBhZGRpbmc6IDBweCAwcHg7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDVweDtcclxufVxyXG5cclxuXHJcbi5hZGRUZXh0RmllbGR7XHJcblx0d2lkdGg6IDI0MHB4O1xyXG5cdGJhY2tncm91bmQ6ICNmZmY7XHJcbn1cclxuLmFkZGVySWNvbntcclxuXHRkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICBwYWRkaW5nOiA2cHggMTBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xyXG59XHJcblxyXG4uc3Bpbm5lclN0eWxle1xyXG5cdHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIGxlZnQ6IDUwJTtcclxuICAgIHRvcDogNTAlO1xyXG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XHJcbiAgICB6LWluZGV4OiA5OTk7XHJcbn1cclxuXHJcblx0dGFibGV7XHJcblx0XHR3aWR0aDoxMDAlO1xyXG5cdH1cclxuXHJcbiIsIi5tYXJnaW4tY2hpbGQtMjAgOjpuZy1kZWVwLm1hdC1mb3JtLWZpZWxkIHtcbiAgbWFyZ2luOiAyMHB4IDA7XG59XG5cbi5tYXJnaW4tY2hpbGQtY2FyZC0yMCA6Om5nLWRlZXAubWF0LWNhcmQge1xuICBtYXJnaW46IDIwcHggMDtcbn1cblxuLnNlbGYtbGVhcm5pbmcge1xuICBmbGV4LXdyYXA6IHdyYXA7XG59XG5cbi5uZXdDYXRlZ29yeSB7XG4gIHBhZGRpbmc6IDA7XG4gIGJveC1zaGFkb3c6IDAgN3B4IDVweCAwcHggcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDJweCAycHggMCByZ2JhKDAsIDAsIDAsIDAuMTQpLCAwIDFweCA1cHggMCByZ2JhKDAsIDAsIDAsIDAuMTIpICFpbXBvcnRhbnQ7XG4gIG1hcmdpbjogMTZweDtcbn1cblxuLmNhdGVnb3J5SGVhZGVyIHtcbiAgcGFkZGluZzogMnB4IDhweDtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBiYWNrZ3JvdW5kOiAjY2VjNGM0O1xufVxuXG4uY2F0ZWdvcnlIZWFkZXI6aG92ZXIsIC5zdWJEZWxJY29uOmhvdmVyIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ubGVhcm5pbmdCYWRnZSB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgbWluLXdpZHRoOiAyMHB4O1xuICBtYXJnaW46IDJweDtcbiAgZm9udC13ZWlnaHQ6IDcwMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2QwY2VjZTtcbiAgY29sb3I6IGJsYWNrO1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG4gIHBhZGRpbmc6IDBweCAwcHg7XG4gIHBhZGRpbmctbGVmdDogNXB4O1xufVxuXG4uYWRkVGV4dEZpZWxkIHtcbiAgd2lkdGg6IDI0MHB4O1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4uYWRkZXJJY29uIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBwYWRkaW5nOiA2cHggMTBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xufVxuXG4uc3Bpbm5lclN0eWxlIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBsZWZ0OiA1MCU7XG4gIHRvcDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgei1pbmRleDogOTk5O1xufVxuXG50YWJsZSB7XG4gIHdpZHRoOiAxMDAlO1xufSJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/datascience/intent-mapper/intent-mapper.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/datascience/intent-mapper/intent-mapper.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: IntentMapperComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IntentMapperComponent", function() { return IntentMapperComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _shared_app_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../shared/app.service */ "./src/app/shared/app.service.ts");
+/* harmony import */ var _shared_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../shared/spinner/spinner.service */ "./src/app/shared/spinner/spinner.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _assets_chats_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../assets/chats.json */ "./src/assets/chats.json");
+var _assets_chats_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../assets/chats.json */ "./src/assets/chats.json", 1);
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var ngx_filesaver__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-filesaver */ "./node_modules/ngx-filesaver/fesm2015/ngx-filesaver.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+
+
+
+
+
+
+
+
+let IntentMapperComponent = class IntentMapperComponent {
+    constructor(// tslint:disable-next-line: variable-name
+    _snackBar, 
+    // tslint:disable-next-line: variable-name
+    _FileSaverService, fb, spinnerService, appService) {
+        this._snackBar = _snackBar;
+        this._FileSaverService = _FileSaverService;
+        this.fb = fb;
+        this.spinnerService = spinnerService;
+        this.appService = appService;
+        this.showSpinner = false;
+        this.selectedDate = null;
+        this.datePickerValue = new Date();
+        this.defaultScore = null;
+        this.dataSource = [];
+        this.chats = _assets_chats_json__WEBPACK_IMPORTED_MODULE_4__;
+        this.addCategoryValue = '';
+        this.addSubCategoryValue = { Sentinel: '', GUP: '' };
+        this.allChats = this.chats;
+        this.dropdownMenu = [
+            { value: 'sentinal', viewValue: 'Sentinel' },
+            { value: 'gup', viewValue: 'GUP' },
+            { value: 'san-validity', viewValue: 'San validity' },
+            { value: 'san-engagement', viewValue: 'San engagement' },
+            { value: 'greetings', viewValue: 'Greetings' }
+        ];
+        this.scores = [
+            { value: 'p', viewValue: 'P' },
+            { value: 'all', viewValue: 'All' }
+        ];
+    }
+    ngOnInit() {
+        this.myForm = this.fb.group({
+            nOfIterations: '',
+            nOfTopWords: '',
+            refresh: '',
+            seedConfidence: '',
+            minSentenceLength: '',
+            cBelConfScore: '',
+            date: ''
+        });
+    }
+    addIntent(chatId, intentValue) {
+        this.chats
+            .filter(chat => chat.id === chatId)
+            .map(chat => (Object.assign({}, chat, { intent: intentValue })));
+    }
+    downloadData() {
+        const fileName = `chats.json`;
+        const fileType = this._FileSaverService.genType(fileName);
+        const txtBlob = new Blob([JSON.stringify(this.chats)], { type: fileType });
+        this._FileSaverService.save(txtBlob, fileName);
+        this.appService.showSpinnerOnLoad();
+    }
+    filterWithDate(chats, dateValue) {
+        if (dateValue != null) {
+            return chats.filter(chat => {
+                return new Date(chat.timestamp).getDate() === new Date(dateValue).getDate();
+            });
+        }
+        else {
+            return chats;
+        }
+    }
+    filterWithScore(chats, score) {
+        if (score) {
+            if (score === 'p') {
+                return chats.filter(chat => chat.score <= 50);
+            }
+            if (score === 'all') {
+                return chats;
+            }
+        }
+    }
+    filter() {
+        let newChats = this.chats;
+        if (this.datePickerValue != null && this.defaultScore != null) {
+            newChats = this.filterWithDate(newChats, this.datePickerValue);
+            newChats = this.filterWithScore(newChats, this.defaultScore);
+        }
+        else if (this.datePickerValue != null) {
+            newChats = this.filterWithDate(newChats, this.datePickerValue);
+        }
+        else if (this.defaultScore != null) {
+            newChats = this.filterWithScore(newChats, this.defaultScore);
+        }
+        this.allChats = newChats;
+    }
+    saveTheData(chatId, intentValue) {
+        this.addIntent(chatId, intentValue);
+        this._snackBar.open('Saved!', 'Close', {
+            duration: 500,
+        });
+    }
+    removeFilter() {
+        this.datePickerValue = undefined;
+        this.selectedDate = null;
+        this.allChats = this.chats;
+    }
+};
+IntentMapperComponent.ctorParameters = () => [
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"] },
+    { type: ngx_filesaver__WEBPACK_IMPORTED_MODULE_6__["FileSaverService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"] },
+    { type: _shared_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_2__["SpinnerService"] },
+    { type: _shared_app_service__WEBPACK_IMPORTED_MODULE_1__["AppService"] }
+];
+IntentMapperComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-intent-mapper',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./intent-mapper.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/intent-mapper/intent-mapper.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./intent-mapper.component.scss */ "./src/app/datascience/intent-mapper/intent-mapper.component.scss")).default]
+    })
+], IntentMapperComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/datascience/self-learning/self-learning.component.scss":
+/*!************************************************************************!*\
+  !*** ./src/app/datascience/self-learning/self-learning.component.scss ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".margin-child-20 ::ng-deep.mat-form-field {\n  margin: 20px 0;\n}\n\n.margin-child-card-20 ::ng-deep.mat-card {\n  margin: 20px 0;\n}\n\n.self-learning {\n  flex-wrap: wrap;\n}\n\n.newCategory {\n  padding: 0;\n  box-shadow: 0 7px 5px 0px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;\n  margin: 16px;\n}\n\n.categoryHeader {\n  padding: 2px 8px;\n  display: flex;\n  justify-content: space-between;\n  background: #cec4c4;\n}\n\n.categoryHeader:hover, .subDelIcon:hover {\n  cursor: pointer;\n}\n\n.learningBadge {\n  display: inline-block;\n  min-width: 20px;\n  margin: 2px;\n  font-weight: 700;\n  background-color: #d0cece;\n  color: black;\n  border-radius: 5px;\n  padding: 0px 0px;\n  padding-left: 5px;\n}\n\n.addTextField {\n  width: 240px;\n  background: #fff;\n}\n\n.adderIcon {\n  display: inline-block;\n  padding: 6px 10px;\n  background-color: #eee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n\n.spinnerStyle {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 999;\n}\n\ntable {\n  width: 100%;\n}\n\n.overlay {\n  position: fixed;\n  /* Sit on top of the page content */\n  width: 100%;\n  /* Full width (cover the whole page) */\n  height: 100%;\n  /* Full height (cover the whole page) */\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.5);\n  /* Black background with opacity */\n  z-index: 999;\n  /* Specify a stack order in case you're using a different order for other elements */\n  cursor: pointer;\n  /* Add a pointer on hover */\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGF0YXNjaWVuY2Uvc2VsZi1sZWFybmluZy9DOlxcb2ZmaWNlXFxjaGF0Ym90XFxib3RDaGF0L3NyY1xcYXBwXFxkYXRhc2NpZW5jZVxcc2VsZi1sZWFybmluZ1xcc2VsZi1sZWFybmluZy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZGF0YXNjaWVuY2Uvc2VsZi1sZWFybmluZy9zZWxmLWxlYXJuaW5nLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtBQ0NKOztBREVBO0VBQ0ksY0FBQTtBQ0NKOztBREVBO0VBQ0MsZUFBQTtBQ0NEOztBREVBO0VBQ0MsVUFBQTtFQUNBLHlIQUFBO0VBQ0EsWUFBQTtBQ0NEOztBREVBO0VBQ0MsZ0JBQUE7RUFDRyxhQUFBO0VBQ0EsOEJBQUE7RUFDQSxtQkFBQTtBQ0NKOztBREVBO0VBQ0MsZUFBQTtBQ0NEOztBREVBO0VBQ0MscUJBQUE7RUFDQSxlQUFBO0VBQ0EsV0FBQTtFQUNHLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSxZQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0FDQ0o7O0FER0E7RUFDQyxZQUFBO0VBQ0EsZ0JBQUE7QUNBRDs7QURFQTtFQUNDLHFCQUFBO0VBQ0csaUJBQUE7RUFDQSxzQkFBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURFQTtFQUNDLGVBQUE7RUFDRyxTQUFBO0VBQ0EsUUFBQTtFQUNBLGdDQUFBO0VBQ0EsWUFBQTtBQ0NKOztBREVDO0VBQ0MsV0FBQTtBQ0NGOztBREVBO0VBQ0UsZUFBQTtFQUFpQixtQ0FBQTtFQUNqQixXQUFBO0VBQWEsc0NBQUE7RUFDYixZQUFBO0VBQWMsdUNBQUE7RUFDZCxNQUFBO0VBQ0EsT0FBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0Esb0NBQUE7RUFBbUMsa0NBQUE7RUFDbkMsWUFBQTtFQUFjLG9GQUFBO0VBQ2QsZUFBQTtFQUFpQiwyQkFBQTtBQ09uQiIsImZpbGUiOiJzcmMvYXBwL2RhdGFzY2llbmNlL3NlbGYtbGVhcm5pbmcvc2VsZi1sZWFybmluZy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXJnaW4tY2hpbGQtMjAgOjpuZy1kZWVwLm1hdC1mb3JtLWZpZWxkIHtcclxuICAgIG1hcmdpbjogMjBweCAwXHJcbn1cclxuXHJcbi5tYXJnaW4tY2hpbGQtY2FyZC0yMCA6Om5nLWRlZXAubWF0LWNhcmQge1xyXG4gICAgbWFyZ2luOiAyMHB4IDA7XHJcbn1cclxuXHJcbi5zZWxmLWxlYXJuaW5ne1xyXG5cdGZsZXgtd3JhcDogd3JhcDtcclxufVxyXG5cclxuLm5ld0NhdGVnb3J5e1xyXG5cdHBhZGRpbmc6MDtcclxuXHRib3gtc2hhZG93OiAwIDdweCA1cHggMHB4IHJnYmEoMCwwLDAsLjIpLCAwIDJweCAycHggMCByZ2JhKDAsMCwwLC4xNCksIDAgMXB4IDVweCAwIHJnYmEoMCwwLDAsLjEyKSAhaW1wb3J0YW50O1xyXG5cdG1hcmdpbjogMTZweDtcclxufVxyXG5cclxuLmNhdGVnb3J5SGVhZGVye1xyXG5cdHBhZGRpbmc6IDJweCA4cHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gICAgYmFja2dyb3VuZDogI2NlYzRjNDtcclxufVxyXG5cclxuLmNhdGVnb3J5SGVhZGVyOmhvdmVyICwgLnN1YkRlbEljb246aG92ZXJ7XHJcblx0Y3Vyc29yOiBwb2ludGVyO1xyXG59XHJcblxyXG4ubGVhcm5pbmdCYWRnZXtcclxuXHRkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcblx0bWluLXdpZHRoOiAyMHB4O1xyXG5cdG1hcmdpbjogMnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDcwMDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNkMGNlY2U7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgICBwYWRkaW5nOiAwcHggMHB4O1xyXG4gICAgcGFkZGluZy1sZWZ0OiA1cHg7XHJcbn1cclxuXHJcblxyXG4uYWRkVGV4dEZpZWxke1xyXG5cdHdpZHRoOiAyNDBweDtcclxuXHRiYWNrZ3JvdW5kOiAjZmZmO1xyXG59XHJcbi5hZGRlckljb257XHJcblx0ZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgcGFkZGluZzogNnB4IDEwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcclxuICAgIGJvcmRlci1yYWRpdXM6IDRweDtcclxufVxyXG5cclxuLnNwaW5uZXJTdHlsZXtcclxuXHRwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICBsZWZ0OiA1MCU7XHJcbiAgICB0b3A6IDUwJTtcclxuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xyXG4gICAgei1pbmRleDogOTk5O1xyXG59XHJcblxyXG5cdHRhYmxle1xyXG5cdFx0d2lkdGg6MTAwJTtcclxuXHR9XHJcblxyXG4ub3ZlcmxheXtcclxuICBwb3NpdGlvbjogZml4ZWQ7IC8qIFNpdCBvbiB0b3Agb2YgdGhlIHBhZ2UgY29udGVudCAqL1xyXG4gIHdpZHRoOiAxMDAlOyAvKiBGdWxsIHdpZHRoIChjb3ZlciB0aGUgd2hvbGUgcGFnZSkgKi9cclxuICBoZWlnaHQ6IDEwMCU7IC8qIEZ1bGwgaGVpZ2h0IChjb3ZlciB0aGUgd2hvbGUgcGFnZSkgKi9cclxuICB0b3A6IDA7XHJcbiAgbGVmdDogMDtcclxuICByaWdodDogMDtcclxuICBib3R0b206IDA7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwwLjUpOyAvKiBCbGFjayBiYWNrZ3JvdW5kIHdpdGggb3BhY2l0eSAqL1xyXG4gIHotaW5kZXg6IDk5OTsgLyogU3BlY2lmeSBhIHN0YWNrIG9yZGVyIGluIGNhc2UgeW91J3JlIHVzaW5nIGEgZGlmZmVyZW50IG9yZGVyIGZvciBvdGhlciBlbGVtZW50cyAqL1xyXG4gIGN1cnNvcjogcG9pbnRlcjsgLyogQWRkIGEgcG9pbnRlciBvbiBob3ZlciAqL1xyXG59IiwiLm1hcmdpbi1jaGlsZC0yMCA6Om5nLWRlZXAubWF0LWZvcm0tZmllbGQge1xuICBtYXJnaW46IDIwcHggMDtcbn1cblxuLm1hcmdpbi1jaGlsZC1jYXJkLTIwIDo6bmctZGVlcC5tYXQtY2FyZCB7XG4gIG1hcmdpbjogMjBweCAwO1xufVxuXG4uc2VsZi1sZWFybmluZyB7XG4gIGZsZXgtd3JhcDogd3JhcDtcbn1cblxuLm5ld0NhdGVnb3J5IHtcbiAgcGFkZGluZzogMDtcbiAgYm94LXNoYWRvdzogMCA3cHggNXB4IDBweCByZ2JhKDAsIDAsIDAsIDAuMiksIDAgMnB4IDJweCAwIHJnYmEoMCwgMCwgMCwgMC4xNCksIDAgMXB4IDVweCAwIHJnYmEoMCwgMCwgMCwgMC4xMikgIWltcG9ydGFudDtcbiAgbWFyZ2luOiAxNnB4O1xufVxuXG4uY2F0ZWdvcnlIZWFkZXIge1xuICBwYWRkaW5nOiAycHggOHB4O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIGJhY2tncm91bmQ6ICNjZWM0YzQ7XG59XG5cbi5jYXRlZ29yeUhlYWRlcjpob3ZlciwgLnN1YkRlbEljb246aG92ZXIge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5sZWFybmluZ0JhZGdlIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBtaW4td2lkdGg6IDIwcHg7XG4gIG1hcmdpbjogMnB4O1xuICBmb250LXdlaWdodDogNzAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZDBjZWNlO1xuICBjb2xvcjogYmxhY2s7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgcGFkZGluZzogMHB4IDBweDtcbiAgcGFkZGluZy1sZWZ0OiA1cHg7XG59XG5cbi5hZGRUZXh0RmllbGQge1xuICB3aWR0aDogMjQwcHg7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG59XG5cbi5hZGRlckljb24ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHBhZGRpbmc6IDZweCAxMHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xuICBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG59XG5cbi5zcGlubmVyU3R5bGUge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGxlZnQ6IDUwJTtcbiAgdG9wOiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICB6LWluZGV4OiA5OTk7XG59XG5cbnRhYmxlIHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5vdmVybGF5IHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICAvKiBTaXQgb24gdG9wIG9mIHRoZSBwYWdlIGNvbnRlbnQgKi9cbiAgd2lkdGg6IDEwMCU7XG4gIC8qIEZ1bGwgd2lkdGggKGNvdmVyIHRoZSB3aG9sZSBwYWdlKSAqL1xuICBoZWlnaHQ6IDEwMCU7XG4gIC8qIEZ1bGwgaGVpZ2h0IChjb3ZlciB0aGUgd2hvbGUgcGFnZSkgKi9cbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbiAgYm90dG9tOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG4gIC8qIEJsYWNrIGJhY2tncm91bmQgd2l0aCBvcGFjaXR5ICovXG4gIHotaW5kZXg6IDk5OTtcbiAgLyogU3BlY2lmeSBhIHN0YWNrIG9yZGVyIGluIGNhc2UgeW91J3JlIHVzaW5nIGEgZGlmZmVyZW50IG9yZGVyIGZvciBvdGhlciBlbGVtZW50cyAqL1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIC8qIEFkZCBhIHBvaW50ZXIgb24gaG92ZXIgKi9cbn0iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/datascience/self-learning/self-learning.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/datascience/self-learning/self-learning.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: SelfLearningComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelfLearningComponent", function() { return SelfLearningComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _shared_app_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../shared/app.service */ "./src/app/shared/app.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var ngx_filesaver__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-filesaver */ "./node_modules/ngx-filesaver/fesm2015/ngx-filesaver.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+
+
+
+// import ChatsJson from '../../../assets/ChatsJson';
+
+
+
+let SelfLearningComponent = class SelfLearningComponent {
+    constructor(// tslint:disable-next-line: variable-name
+    _snackBar, 
+    // tslint:disable-next-line: variable-name
+    _FileSaverService, fb, appService) {
+        this._snackBar = _snackBar;
+        this._FileSaverService = _FileSaverService;
+        this.fb = fb;
+        this.appService = appService;
+        this.displayedColumns = ['Sentences', 'intent', 'probability'];
+        // showSpinner = false;
+        this.selectedDate = null;
+        this.datePickerValue = new Date();
+        this.defaultScore = null;
+        this.dataSource = [];
+        // chats = ChatsJson;
+        this.addCategoryValue = '';
+        this.addSubCategoryValue = { Sentinel: '', GUP: '' };
+        this.dataSourceOriginal = [{ Sentences: 'what is SAN', intent: 'Sentinel', probability: 1.0 },
+            { Sentences: 'san Validity?', intent: 'san-validity', probability: 0.9452662722 },
+            { Sentences: 'What is a GUP?', intent: 'Gup', probability: 0.746031746 },
+            { Sentences: 'SAN', intent: 'Sentinel', probability: 0.5555555556 },
+            { Sentences: 'san engaging parties?', intent: 'engaging_parties', probability: 0.8373015873 },
+            { Sentences: 'what is sam?', intent: 'Gup', probability: 0.9444444444 },
+            { Sentences: 'what is gip', intent: 'Gup', probability: 0.9889807163 },
+            { Sentences: 'can you tell me about gpu ?', intent: 'Gup', probability: 0.7392883079 }];
+        this.dataSourceOriginal1 = [{ Sentences: 'what is SAN', intent: '', probability: 0 },
+            { Sentences: 'san Validity?', intent: '', probability: 0 },
+            { Sentences: 'What is a GUP?', intent: '', probability: 0 },
+            { Sentences: 'SAN', intent: '', probability: 0 },
+            { Sentences: 'san engaging parties?', intent: '', probability: 0 },
+            { Sentences: 'what is sam?', intent: '', probability: 0 },
+            { Sentences: 'what is gip', intent: '', probability: 0 },
+            { Sentences: 'can you tell me about gpu ?', intent: '', probability: 0 }];
+        // allChats = this.chats;
+        this.dropdownMenu = [
+            { value: 'sentinal', viewValue: 'Sentinel' },
+            { value: 'gup', viewValue: 'GUP' },
+            { value: 'san-validity', viewValue: 'San validity' },
+            { value: 'san-engagement', viewValue: 'San engagement' },
+            { value: 'greetings', viewValue: 'Greetings' }
+        ];
+        this.addCategory = [{ categoryName: 'Sentinel', subCategory: ['Sentinol', 'Sentinql', 'Sentinwl', 'Sentinrl'] },
+            { categoryName: 'GUP', subCategory: ['GQP', 'GWP', 'GEP', 'GRP'] }];
+        this.scores = [
+            { value: 'p', viewValue: 'P' },
+            { value: 'all', viewValue: 'All' }
+        ];
+        this.dashboard = {
+            name: 'Management View',
+            url: 'https://app.powerbi.com/reportEmbed?reportId=085fbb23-24ee-4b31-82e0-d784713b319f&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
+        };
+        this.subdashboard = {
+            name: 'Dashboard View',
+            url: 'https://app.powerbi.com/reportEmbed?reportId=92edb2bb-4709-48a0-ae9f-c52ab713b4be&autoAuth=true&ctid=54f1c50c-e960-4359-94fa-e790e17dcfb4&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWluZGlhLWNlbnRyYWwtYS1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9'
+        };
+    }
+    ngOnInit() {
+        this.myForm = this.fb.group({
+            nOfIterations: '',
+            nOfTopWords: '',
+            refresh: '',
+            seedConfidence: '',
+            minSentenceLength: '',
+            cBelConfScore: '',
+            date: ''
+        });
+        const selfLearningData = JSON.parse(localStorage.getItem('data'));
+        const addCategoryData = JSON.parse(localStorage.getItem('addCategoryData'));
+        if (selfLearningData) {
+            this.myForm.controls.nOfIterations.setValue(selfLearningData.nOfIterations);
+            this.myForm.controls.nOfTopWords.setValue(selfLearningData.nOfTopWords);
+            this.myForm.controls.refresh.setValue(selfLearningData.refresh);
+            this.myForm.controls.seedConfidence.setValue(selfLearningData.seedConfidence);
+            this.myForm.controls.minSentenceLength.setValue(selfLearningData.minSentenceLength);
+            this.myForm.controls.cBelConfScore.setValue(selfLearningData.cBelConfScore);
+            this.myForm.controls.date.setValue(selfLearningData.date);
+        }
+        if (addCategoryData) {
+            this.addCategory = JSON.parse(JSON.stringify(addCategoryData));
+        }
+        this.intentValues = this.addCategory.map(data => {
+            return data.categoryName.toLowerCase();
+        });
+        this.filterFromAddCtegories();
+        console.log('this.intentValues', this.intentValues);
+        console.log('selfLearningData', selfLearningData);
+    }
+    addNote(addCategoryValue) {
+        const obj = { categoryName: addCategoryValue, subCategory: [] };
+        this.addCategory.push(obj);
+        this.intentValues.push(addCategoryValue);
+        console.log(' this.addCategory', this.addCategory);
+    }
+    saveCategory() {
+        // this.showSpinner = true;
+        // setTimeout(() => {
+        localStorage.setItem('addCategoryData', JSON.stringify(this.addCategory));
+        console.log('this.intentValues final', this.intentValues);
+        // this.filterFromAddCtegories();
+        // this.showSpinner = false;
+        // }, 2000);
+        this.appService.showSpinnerOnLoad();
+    }
+    onSubmit() {
+        // this.showSpinner = true;
+        // setTimeout(() => {
+        this.appService.showSpinnerOnLoad();
+        localStorage.setItem('data', JSON.stringify(this.myForm.value));
+        console.log('this.intentValues final', this.intentValues);
+        this.filterFromAddCtegories();
+        // this.showSpinner = false;
+        // }, 3500);
+    }
+    filterFromAddCtegories() {
+        this.dataSource = [];
+        const filteredArr = [];
+        const unfilteredArr = [];
+        const tempArr = JSON.parse(JSON.stringify(this.dataSourceOriginal));
+        if (this.intentValues.length == 0) {
+            this.dataSource = JSON.parse(JSON.stringify(this.dataSourceOriginal1));
+        }
+        else {
+            for (let i = 0; i < this.intentValues.length; i++) {
+                const filterData = this.dataSourceOriginal.filter(data => {
+                    return data.intent.toLowerCase() == this.intentValues[i].toLowerCase();
+                });
+                this.dataSource.push(...filterData); // filtered data
+            }
+        }
+        for (let i = 0; i < this.dataSourceOriginal.length; i++) {
+            const filterData = this.intentValues.filter(data => {
+                return data.toLowerCase() == this.dataSourceOriginal[i].intent.toLowerCase();
+            });
+            if (filterData.length == 0) {
+                // this.dataSource.push(...filterData);
+                // } else {
+                const obj = JSON.parse(JSON.stringify(this.dataSourceOriginal[i]));
+                console.log('obj', obj);
+                obj.intent = '';
+                obj.probability = 0;
+                this.dataSource.push(obj);
+            }
+        }
+    }
+    deleteCategory(categoryName) {
+        for (let i = 0; i < this.addCategory.length; i++) {
+            if (this.addCategory[i].categoryName == categoryName) {
+                this.addCategory.splice(i, 1);
+            }
+        }
+        const intentIndexValue = this.intentValues.indexOf(categoryName);
+        this.intentValues.splice(intentIndexValue, 1);
+        console.log('deleted this.intentValues', this.intentValues);
+    }
+    deleteSubCategory(categoryName, categorySubName) {
+        for (let i = 0; i < this.addCategory.length; i++) {
+            if (this.addCategory[i].categoryName == categoryName) {
+                const subCatIndex = this.addCategory[i].subCategory.indexOf(categorySubName);
+                this.addCategory[i].subCategory.splice(subCatIndex, 1);
+            }
+        }
+    }
+    addSubCategory(categoryName, categorySubValue) {
+        for (let i = 0; i < this.addCategory.length; i++) {
+            if (this.addCategory[i].categoryName == categoryName) {
+                this.addCategory[i].subCategory.push(categorySubValue);
+            }
+        }
+        console.log('this.addCategory', this.addCategory);
+    }
+    // addIntent(chatId, intentValue) {
+    //   this.chats
+    //     .filter(chat => chat.id === chatId)
+    //     .map(chat => ({ ...chat, intent: intentValue }));
+    // }
+    // downloadData() {
+    //   const fileName = `chats.json`;
+    //   const fileType = this._FileSaverService.genType(fileName);
+    //   const txtBlob = new Blob([JSON.stringify(this.chats)], { type: fileType });
+    //   this._FileSaverService.save(txtBlob, fileName);
+    // }
+    filterWithDate(chats, dateValue) {
+        if (dateValue != null) {
+            return chats.filter(chat => {
+                return new Date(chat.timestamp).getDate() === new Date(dateValue).getDate();
+            });
+        }
+        else {
+            return chats;
+        }
+    }
+    filterWithScore(chats, score) {
+        if (score) {
+            if (score === 'p') {
+                return chats.filter(chat => chat.score <= 50);
+            }
+            if (score === 'all') {
+                return chats;
+            }
+        }
+    }
+    // filter() {
+    //   let newChats = this.chats;
+    //   if (this.datePickerValue != null && this.defaultScore != null) {
+    //     newChats = this.filterWithDate(newChats, this.datePickerValue);
+    //     newChats = this.filterWithScore(newChats, this.defaultScore);
+    //   } else if (this.datePickerValue != null) {
+    //     newChats = this.filterWithDate(newChats, this.datePickerValue);
+    //   } else if (this.defaultScore != null) {
+    //     newChats = this.filterWithScore(newChats, this.defaultScore);
+    //   }
+    //   this.allChats = newChats;
+    // }
+    saveTheData(chatId, intentValue) {
+        // this.addIntent(chatId, intentValue);
+        this._snackBar.open('Saved!', 'Close', {
+            duration: 500,
+        });
+    }
+    removeFilter() {
+        this.datePickerValue = undefined;
+        this.selectedDate = null;
+        // this.allChats = this.chats;
+    }
+};
+SelfLearningComponent.ctorParameters = () => [
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatSnackBar"] },
+    { type: ngx_filesaver__WEBPACK_IMPORTED_MODULE_4__["FileSaverService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _shared_app_service__WEBPACK_IMPORTED_MODULE_1__["AppService"] }
+];
+SelfLearningComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-self-learning',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./self-learning.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/datascience/self-learning/self-learning.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./self-learning.component.scss */ "./src/app/datascience/self-learning/self-learning.component.scss")).default]
+    })
+], SelfLearningComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/assets/chats.json":
+/*!*******************************!*\
+  !*** ./src/assets/chats.json ***!
+  \*******************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("[{\"id\":1,\"timestamp\":\"2019-11-20T14:02:06.2823772Z\",\"duration\":1651.0316,\"question\":\"what is SAN\",\"answer\":\"A SAN is valid until the end of the engagement\\nand up to a maximum of three years. However, the approvers (typically the\\nSentinel Lead Partner and/or Conflicts Resolver) can restrict the validity of a\\nSAN for a limited period.\\n\\nA SAN for recurring engagements for a SEC audit\\nclient and its affiliates is valid for only one year.\\n\\nA member firm's local policies may require a new SAN more frequently than every\\nthree years in certain circumstances.\",\"score\":98,\"performanceBucket\":\"1sec-3sec\"},{\"id\":2,\"timestamp\":\"2019-11-20T14:02:57.7860385Z\",\"duration\":445.2158,\"question\":\"san Validity?\",\"answer\":\"A SAN is valid until the end of the engagement\\nand up to a maximum of three years. However, the approvers (typically the\\nSentinel Lead Partner and/or Conflicts Resolver) can restrict the validity of a\\nSAN for a limited period.\\n\\nA SAN for recurring engagements for a SEC audit\\nclient and its affiliates is valid for only one year.\\n\\nA member firm's local policies may require a new SAN more frequently than every\\nthree years in certain circumstances.\",\"score\":95,\"performanceBucket\":\"250ms-500ms\"},{\"id\":3,\"timestamp\":\"2019-11-20T14:03:10.0718863Z\",\"duration\":755.6881,\"question\":\"What is a GUP?\",\"answer\":\"The Global Ultimate Parent (GUP) is the highest-tiered entity in a family tree in Sentinel. A Sentinel Tree typically consists of all entities that are ultimately controlled by the GUP or the GUP has significant influence. For example, for all Microsoft Sentinel entities, the GUP will be Microsoft Corporation.\",\"score\":87,\"performanceBucket\":\"500ms-1sec\"},{\"id\":4,\"timestamp\":\"2019-11-20T14:08:21.5056852Z\",\"duration\":499.631,\"question\":\"SAN\",\"answer\":\"Sentinel is a KPMG software that identifies independence approval requirements and potential conflicts of interest in respect of all proposed engagements from KPMG member firms. After entering the basic engagement information in the Sentinel Request, the tool routes the proposed engagements through a global approval process culminating in a Sentinel Approval Number (SAN) per engagement. It is essential to get a SAN before committing the firm to do an engagement.\",\"score\":85,\"performanceBucket\":\"500ms-1sec\"},{\"id\":5,\"timestamp\":\"2019-11-19T15:38:00.1116947Z\",\"duration\":5210.0185,\"question\":\"san engaging parties?\",\"answer\":\"The following are to be added as Engaging Parties:\\n Any party signing the engagement contract or otherwise bound to the engagement contract.\\n Any party that is to pay any of the fees for the service.\\n Any party that has a role in defining the scope of the engagement.\\n Any party that has a role in selecting KPMG for the service should be listed as an additional Engaging Party\\nIn addition, the  following have to be included as Engaging Parties as well:\\n a prime contractor hiring KPM\\n a subcontractor  of KPMG\\n a target if the seller is an Engaging Party (in a Deal Advisory engagement)\",\"score\":90,\"performanceBucket\":\"3sec-7sec\"},{\"id\":6,\"timestamp\":\"2019-11-19T15:43:34.1477372Z\",\"duration\":902.488,\"question\":\"what is sam?\",\"answer\":\"I am sorry, I did not understand your query, could you rephrase your query?\",\"score\":40,\"performanceBucket\":\"500ms-1sec\"},{\"id\":7,\"timestamp\":\"2019-11-20T02:27:55.6404006Z\",\"duration\":1577.9962,\"question\":\"what is gip\",\"answer\":\"I am sorry, I did not understand your query, could you rephrase your query?\",\"score\":45,\"performanceBucket\":\"1sec-3sec\"},{\"id\":8,\"timestamp\":\"2019-11-20T02:28:04.9037783Z\",\"duration\":504.0722,\"question\":\"can you tell me about gpu ?\",\"answer\":\"I am sorry, I did not understand your query, could you rephrase your query?\",\"score\":38,\"performanceBucket\":\"500ms-1sec\"}]");
+
+/***/ })
+
+}]);
+//# sourceMappingURL=app-datascience-datascience-module-es2015.js.map

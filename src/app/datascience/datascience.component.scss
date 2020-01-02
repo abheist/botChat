@@ -1,0 +1,72 @@
+.margin-child-20 ::ng-deep.mat-form-field {
+    margin: 20px 0
+}
+
+.margin-child-card-20 ::ng-deep.mat-card {
+    margin: 20px 0;
+}
+
+.self-learning{
+	flex-wrap: wrap;
+}
+
+.newCategory{
+	padding:0;
+	box-shadow: 0 7px 5px 0px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
+	margin: 16px;
+}
+
+.categoryHeader{
+	padding: 2px 8px;
+    display: flex;
+    justify-content: space-between;
+    background: #cec4c4;
+}
+
+.categoryHeader:hover , .subDelIcon:hover{
+	cursor: pointer;
+}
+
+.learningBadge{
+	display: inline-block;
+	min-width: 20px;
+	margin: 2px;
+    font-weight: 700;
+    background-color: #d0cece;
+    color: black;
+    border-radius: 5px;
+    padding: 0px 0px;
+    padding-left: 5px;
+}
+
+
+.addTextField{
+	width: 240px;
+	background: #fff;
+}
+.adderIcon{
+	display: inline-block;
+    padding: 6px 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+
+	table{
+		width:100%;
+	}
+
+.overlay{
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}

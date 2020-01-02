@@ -1,6 +1,4 @@
-.padding-20 {
-	padding: 20px;
-}
+@import '../styles.scss';
 
 .type-badge {
 	font-size: 12px;
@@ -161,6 +159,12 @@
     background-color: #eee;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+
+.mat-toolbar {
+  position: relative;
+  z-index: 2;
 }
 
 

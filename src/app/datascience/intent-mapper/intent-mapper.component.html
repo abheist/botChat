@@ -1,0 +1,114 @@
+<div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="height: 64px; background:#e2e2e2;" class="padding-0-20">
+        <div fxLayout="column" fxLayoutAlign="start start">
+            <p class="mat-body-2" style="margin: 0; padding: 0;">
+                Console to map chat exceptions to right intent:
+            </p>
+            <div class="clearfix">
+                <div style="list-style: none;">
+                    <div style="float: left; margin-right: 10px; ">
+                        <span style="border: 1px solid #ccc; 
+									float: left; 
+									width: 12px; 
+									height: 12px; 
+									margin: 0 2px;
+									background-color: green;"></span>
+                        Chat Score > 50%
+                    </div>
+                    <div style="float: left; margin-right: 10px; ">
+                        <span style="border: 1px solid #ccc; 
+									float: left; 
+									width: 12px; 
+									height: 12px; 
+									margin: 0 2px;
+									background-color: red;"></span>
+                        Chat Score
+                        < 50% </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+                <mat-form-field color="primary" appearance="outline">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateInput)="filter()" [(ngModel)]="datePickerValue"
+                    />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field color="primary" appearance="outline">
+                    <mat-label>Score Level</mat-label>
+                    <mat-select [(value)]="defaultScore" (selectionChange)="filter()">
+                        <mat-option *ngFor="let score of scores" [value]="score.value">
+                            {{ score.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-mini-fab (click)="downloadData()" class="downloadbutton-style" color="primary">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="padding-20">
+            <mat-accordion style="width: 300px; margin: 20px 0; background: #ffffff; border-radius: 8px;" *ngFor="let chat of allChats"
+                class="mat-elevation-z0">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="type-badge red" *ngIf="chat.score <= 50">P</span>
+                            <span class="type-badge green" *ngIf="chat.score > 50">OK</span>
+                        </mat-panel-title>
+                        <mat-panel-description> Avg. chat score: {{ chat.score }} </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="grey-background">
+                        <div style="max-height: 300px; overflow: auto; padding-left: 24px;">
+                            <div class="padding-vertical-5">
+                                <div class="mat-body-2">Date:</div>
+                                <div class="mat-caption">{{ chat.timestamp | date }}</div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div fxLayout="row">
+                                <div fxFlex="90">
+                                    <div class="padding-vertical-5">
+                                        <div class="mat-body-2">Question:</div>
+                                        <div class="mat-caption">{{ chat.question }}</div>
+                                    </div>
+                                    <mat-divider></mat-divider>
+                                    <div class="padding-vertical-5">
+                                        <div class="mat-body-2">Answer:</div>
+                                        <div class="mat-caption">{{ chat.answer }}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                                        <mat-icon>chevron_right</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <div (click)="$event.stopPropagation()">
+                                            <p style="padding: 0 16px; font-weight: 700;">Add to Intent</p>
+                                            <mat-divider></mat-divider>
+                                            <div style="padding: 10px 16px;">
+                                                <div style="padding: 7px;">{{ chat.question }}</div>
+                                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-label>Select Intent</mat-label>
+                                                        <mat-select [(ngModel)]="chat.intent">
+                                                            <mat-option *ngFor="let intent of dropdownMenu" [value]="intent.value">
+                                                                {{ intent.viewValue }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <button mat-icon-buttofn (click)="saveTheData(chat.id); menuTrigger.closeMenu()">
+                                                        <mat-icon>save</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-menu>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>

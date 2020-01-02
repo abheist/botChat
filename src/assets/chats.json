@@ -49,8 +49,8 @@
         "timestamp": "2019-11-19T15:43:34.1477372Z",
         "duration": 902.488,
         "question": "what is sam?",
-        "answer": "I am sorry, I could not understand you.",
-        "score": 20,
+        "answer": "I am sorry, I did not understand your query, could you rephrase your query?",
+        "score": 40,
         "performanceBucket": "500ms-1sec"
     },
     {
@@ -58,8 +58,8 @@
         "timestamp": "2019-11-20T02:27:55.6404006Z",
         "duration": 1577.9962,
         "question": "what is gip",
-        "answer": "I am sorry, I could not understand you.",
-        "score": 15,
+        "answer": "I am sorry, I did not understand your query, could you rephrase your query?",
+        "score": 45,
         "performanceBucket": "1sec-3sec"
     },
     {
@@ -67,8 +67,8 @@
         "timestamp": "2019-11-20T02:28:04.9037783Z",
         "duration": 504.0722,
         "question": "can you tell me about gpu ?",
-        "answer": "I am sorry, I could not understand you.",
-        "score": 23,
+        "answer": "I am sorry, I did not understand your query, could you rephrase your query?",
+        "score": 38,
         "performanceBucket": "500ms-1sec"
     }
 ]

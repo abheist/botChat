@@ -1,0 +1,24 @@
+<section fxLayoutAlign="center" style="margin:50px 20px 20px;">
+    <mat-card class="box-shadow" style="width:400px;">
+        <mat-card-content>
+            <form fxLayout="column" fxLayoutGap="20px" class="margin-child-20">
+                <mat-form-field color="primary" appearance="outline" fxFlex="30" style="width:100%">
+                    <mat-label>Username</mat-label>
+                    <input matInput type="text" [(ngModel)]="username" name="username" placeholder="Username" />
+                </mat-form-field>
+
+                <mat-form-field color="primary" appearance="outline" fxFlex="30" style="width:100%">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" [(ngModel)]="password" name="password" placeholder="Password" />
+                </mat-form-field>
+                <div class="row">
+                    <button mat-raised-button (click)="login()" color="primary">Sign In</button>
+                </div>
+                <span *ngIf="loginFormIncorrect" style="color:red">*Username or password is incorrect</span>
+            </form>
+            <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+        </mat-card-content>
+    </mat-card>
+</section>
+
+<!-- <app-spinner [showSpinner]="showSpinnerFlag"></app-spinner> -->
