@@ -13,21 +13,18 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SelfLearningComponent implements OnInit {
 
 
-  constructor( // tslint:disable-next-line: variable-name
+  constructor(
     private _snackBar: MatSnackBar,
-    // tslint:disable-next-line: variable-name
     private _FileSaverService: FileSaverService,
     private fb: FormBuilder,
     private appService: AppService) { }
 
   displayedColumns: string[] = ['Sentences', 'intent', 'probability'];
   myForm: FormGroup;
-  // showSpinner = false;
   selectedDate = null;
   datePickerValue = new Date();
   defaultScore = null;
   dataSource = [];
-  // chats = ChatsJson;
   addCategoryValue = '';
   addSubCategoryValue = { Sentinel: '', GUP: '' };
   intentValues: Array<string>;
@@ -51,8 +48,6 @@ export class SelfLearningComponent implements OnInit {
   { Sentences: 'can you tell me about gpu ?', intent: '', probability: 0 }];
 
 
-
-  // allChats = this.chats;
   dropdownMenu = [
     { value: 'sentinal', viewValue: 'Sentinel' },
     { value: 'gup', viewValue: 'GUP' },
@@ -111,38 +106,24 @@ export class SelfLearningComponent implements OnInit {
     });
     this.filterFromAddCtegories();
 
-    console.log('this.intentValues', this.intentValues);
-    console.log('selfLearningData', selfLearningData);
   }
 
   addNote(addCategoryValue) {
     const obj = { categoryName: addCategoryValue, subCategory: [] };
     this.addCategory.push(obj);
     this.intentValues.push(addCategoryValue);
-    console.log(' this.addCategory', this.addCategory);
   }
 
   saveCategory() {
 
-    // this.showSpinner = true;
-    // setTimeout(() => {
     localStorage.setItem('addCategoryData', JSON.stringify(this.addCategory));
-    console.log('this.intentValues final', this.intentValues);
-    // this.filterFromAddCtegories();
-    // this.showSpinner = false;
-    // }, 2000);
     this.appService.showSpinnerOnLoad();
   }
 
   onSubmit() {
-    // this.showSpinner = true;
-    // setTimeout(() => {
     this.appService.showSpinnerOnLoad();
     localStorage.setItem('data', JSON.stringify(this.myForm.value));
-    console.log('this.intentValues final', this.intentValues);
     this.filterFromAddCtegories();
-    // this.showSpinner = false;
-    // }, 3500);
   }
 
   filterFromAddCtegories() {
@@ -166,10 +147,7 @@ export class SelfLearningComponent implements OnInit {
         return data.toLowerCase() == this.dataSourceOriginal[i].intent.toLowerCase();
       });
       if (filterData.length == 0) {
-        // this.dataSource.push(...filterData);
-        // } else {
         const obj = JSON.parse(JSON.stringify(this.dataSourceOriginal[i]));
-        console.log('obj', obj);
         obj.intent = '';
         obj.probability = 0;
         this.dataSource.push(obj);
@@ -185,7 +163,6 @@ export class SelfLearningComponent implements OnInit {
     }
     const intentIndexValue = this.intentValues.indexOf(categoryName);
     this.intentValues.splice(intentIndexValue, 1);
-    console.log('deleted this.intentValues', this.intentValues);
   }
 
   deleteSubCategory(categoryName, categorySubName) {
@@ -204,22 +181,8 @@ export class SelfLearningComponent implements OnInit {
         this.addCategory[i].subCategory.push(categorySubValue);
       }
     }
-    console.log('this.addCategory', this.addCategory);
   }
 
-
-  // addIntent(chatId, intentValue) {
-  //   this.chats
-  //     .filter(chat => chat.id === chatId)
-  //     .map(chat => ({ ...chat, intent: intentValue }));
-  // }
-
-  // downloadData() {
-  //   const fileName = `chats.json`;
-  //   const fileType = this._FileSaverService.genType(fileName);
-  //   const txtBlob = new Blob([JSON.stringify(this.chats)], { type: fileType });
-  //   this._FileSaverService.save(txtBlob, fileName);
-  // }
 
   filterWithDate(chats, dateValue) {
     if (dateValue != null) {
@@ -242,21 +205,8 @@ export class SelfLearningComponent implements OnInit {
     }
   }
 
-  // filter() {
-  //   let newChats = this.chats;
-  //   if (this.datePickerValue != null && this.defaultScore != null) {
-  //     newChats = this.filterWithDate(newChats, this.datePickerValue);
-  //     newChats = this.filterWithScore(newChats, this.defaultScore);
-  //   } else if (this.datePickerValue != null) {
-  //     newChats = this.filterWithDate(newChats, this.datePickerValue);
-  //   } else if (this.defaultScore != null) {
-  //     newChats = this.filterWithScore(newChats, this.defaultScore);
-  //   }
-  //   this.allChats = newChats;
-  // }
 
   saveTheData(chatId, intentValue) {
-    // this.addIntent(chatId, intentValue);
     this._snackBar.open('Saved!', 'Close', {
       duration: 500,
     });
@@ -265,7 +215,6 @@ export class SelfLearningComponent implements OnInit {
   removeFilter() {
     this.datePickerValue = undefined;
     this.selectedDate = null;
-    // this.allChats = this.chats;
   }
 
 }

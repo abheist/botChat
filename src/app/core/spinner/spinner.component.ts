@@ -7,7 +7,6 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
   styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent implements OnInit {
-  // @Input() showSpinner: boolean;
   constructor(private spinnerService: SpinnerService) { }
 
   ngOnInit() {

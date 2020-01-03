@@ -13,9 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class DatascienceComponent implements OnInit {
 
   constructor(
-    // tslint:disable-next-line: variable-name
     private _snackBar: MatSnackBar,
-    // tslint:disable-next-line: variable-name
     private _FileSaverService: FileSaverService,
     private fb: FormBuilder,
     private headerService: HeaderService
@@ -111,16 +109,12 @@ export class DatascienceComponent implements OnInit {
       return data.categoryName.toLowerCase();
     });
     this.filterFromAddCtegories();
-
-    console.log('this.intentValues', this.intentValues);
-    console.log('selfLearningData', selfLearningData);
   }
 
   addNote(addCategoryValue) {
     const obj = { categoryName: addCategoryValue, subCategory: [] };
     this.addCategory.push(obj);
     this.intentValues.push(addCategoryValue);
-    console.log(' this.addCategory', this.addCategory);
   }
 
   saveCategory() {
@@ -128,8 +122,6 @@ export class DatascienceComponent implements OnInit {
     this.showSpinner = true;
     setTimeout(() => {
       localStorage.setItem('addCategoryData', JSON.stringify(this.addCategory));
-      console.log('this.intentValues final', this.intentValues);
-      // this.filterFromAddCtegories();
       this.showSpinner = false;
     }, 2000);
   }
@@ -138,7 +130,6 @@ export class DatascienceComponent implements OnInit {
     this.showSpinner = true;
     setTimeout(() => {
       localStorage.setItem('data', JSON.stringify(this.myForm.value));
-      console.log('this.intentValues final', this.intentValues);
       this.filterFromAddCtegories();
       this.showSpinner = false;
     }, 3500);
@@ -165,10 +156,7 @@ export class DatascienceComponent implements OnInit {
         return data.toLowerCase() == this.dataSourceOriginal[i].intent.toLowerCase();
       });
       if (filterData.length == 0) {
-        // this.dataSource.push(...filterData);
-        // } else {
         const obj = JSON.parse(JSON.stringify(this.dataSourceOriginal[i]));
-        console.log('obj', obj);
         obj.intent = '';
         obj.probability = 0;
         this.dataSource.push(obj);
@@ -184,7 +172,6 @@ export class DatascienceComponent implements OnInit {
     }
     const intentIndexValue = this.intentValues.indexOf(categoryName);
     this.intentValues.splice(intentIndexValue, 1);
-    console.log('deleted this.intentValues', this.intentValues);
   }
 
   deleteSubCategory(categoryName, categorySubName) {
@@ -203,7 +190,6 @@ export class DatascienceComponent implements OnInit {
         this.addCategory[i].subCategory.push(categorySubValue);
       }
     }
-    console.log('this.addCategory', this.addCategory);
   }
 
 
