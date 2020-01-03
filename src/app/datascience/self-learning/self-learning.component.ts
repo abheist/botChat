@@ -1,4 +1,4 @@
-import { AppService } from './../../shared/app.service';
+import { AppService } from './../../core/app.service';
 import { Component, OnInit } from '@angular/core';
 // import ChatsJson from '../../../assets/ChatsJson';
 import { MatSnackBar } from '@angular/material';

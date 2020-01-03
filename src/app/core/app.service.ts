@@ -1,3 +1,4 @@
+
 import { SpinnerService } from './spinner/spinner.service';
 import { Injectable } from '@angular/core';
 
@@ -6,6 +7,8 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
   showSpinner = false;
+
+
   constructor(private spinnerService: SpinnerService) { }
 
   showSpinnerOnLoad() {

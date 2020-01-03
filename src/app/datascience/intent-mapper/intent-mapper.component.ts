@@ -1,5 +1,5 @@
-import { AppService } from './../../shared/app.service';
-import { SpinnerService } from './../../shared/spinner/spinner.service';
+import { AppService } from './../../core/app.service';
+import { SpinnerService } from './../../core/spinner/spinner.service';
 import { Component, OnInit } from '@angular/core';
 import ChatsJson from '../../../assets/chats.json';
 import { MatSnackBar } from '@angular/material';
